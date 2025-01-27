@@ -8,7 +8,3 @@ classOrder = []
 [footer]
 style = "dark"
 copyright = "Copyright plainenglish © 2025. Built with Moonwave and Docusaurus"
-
-[docusaurus]
-url = "https://byteparse.plainenglish.xyz"
-baseUrl = "/"
