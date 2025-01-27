@@ -1,9 +1,15 @@
 name = "plainenglish/byteparse"
-version = "0.1.0"
+version = "1.0.0"
 description = "Pure-luau library for serialising and deserialising binary formats."
 authors = ["plainenglish <plainenglish@spearhead.industries>"]
 repository = "https://github.com/plainenglishh/byteparse"
 license = "MIT"
+includes = [
+    "lib/init.luau",
+    "LICENCE.txt",
+    "README.md",
+    "pesde.toml"
+]
 
 [target]
 environment = "luau"
