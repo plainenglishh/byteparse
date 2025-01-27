@@ -1,0 +1,13 @@
+on:
+    push:
+    pull_request:
+    workflow_dispatch:
+
+jobs:
+    test:
+        name: test
+        runs-on: ubuntu-latest
+        steps:
+            - uses: ok-nick/setup-aftman@v0.4.2
+            - name: Test
+              run: lune run scripts/test

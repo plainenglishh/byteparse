@@ -1,5 +1,5 @@
 --[[
-    plainenglishh/byteparse v0.1.0
+    plainenglishh/byteparse v1.0.0
    
     Pure-luau library for serialising and deserialising binary formats.
 ]]
@@ -33,7 +33,7 @@
 --!strict
 --!nolint LocalShadow
 
-local _BYTEPARSE_VERSION = "v0.1.0";
+local _BYTEPARSE_VERSION = "v1.0.0";
 
 export type u8 = number;
 export type u16 = number;
