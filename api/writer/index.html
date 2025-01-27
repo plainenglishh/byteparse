@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="plugin-moonwave plugin-id-moonwave" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.3">
+<title data-rh="true">writer | Byteparse</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://byteparse.plainenglish.xyz/api/writer"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="writer | Byteparse"><meta data-rh="true" name="description" content="writer instance used to serialise to binary formats.
+
+    "><meta data-rh="true" property="og:description" content="writer instance used to serialise to binary formats.
+
+    "><link data-rh="true" rel="canonical" href="https://byteparse.plainenglish.xyz/api/writer"><link data-rh="true" rel="alternate" href="https://byteparse.plainenglish.xyz/api/writer" hreflang="en"><link data-rh="true" rel="alternate" href="https://byteparse.plainenglish.xyz/api/writer" hreflang="x-default"><link rel="stylesheet" href="/assets/css/styles.7a4bdbad.css">
+<script src="/assets/js/runtime~main.c3eb4bc5.js" defer="defer"></script>
+<script src="/assets/js/main.f1d1d249.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><b class="navbar__title text--truncate">Byteparse</b></a><a class="navbar__item navbar__link" href="/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/api/">API</a><a class="navbar__item navbar__link" href="/changelog">Changelog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/plainenglishh/byteparse" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0 docPageContainer_wNNk"><div class="docPage_Dpn1"><div class="docSidebarContainer_o_re"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/api/byteparse">byteparse</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/api/reader">reader</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/api/writer">writer</a></li></ul></nav></div></div><main class="docMainContainer_HJE1"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_MU3C"><div class="docItemContainer_Wv98"><article><div class="member_J0w1 markdown"><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_oUs_"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><header><h1 class="docTitle_mZRt" style="text-decoration:none"><span style="display:inline-block">writer</span></h1><div class="luaClassTags_EipM"></div><div>
+<p>writer instance used to serialise to binary formats.</p>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="set_capacity"><code style="text-decoration:none">set_capacity</code><a href="#set_capacity" class="hash-link" aria-label="Direct link to set_capacity" title="Direct link to set_capacity">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L211"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">set_capacity</code><code>(</code><div class="inset_uKQm"><div><code>to<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The new size.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Resizes the internal buffer to a set amount.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="expand"><code style="text-decoration:none">expand</code><a href="#expand" class="hash-link" aria-label="Direct link to expand" title="Direct link to expand">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L226"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">expand</code><code>(</code><div class="inset_uKQm"><div><code>needed_size<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The size amount needed.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Ensures the internal buffer can handle <code>needed_size</code> more data by
+  expanding the capacity if necessary.
+</p>
+<p>Relative to the cursor.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="set_cursor"><code style="text-decoration:none">set_cursor</code><a href="#set_cursor" class="hash-link" aria-label="Direct link to set_cursor" title="Direct link to set_cursor">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L255"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">set_cursor</code><code>(</code><div class="inset_uKQm"><div><code>to<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The position to move to.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Sets the write cursor to a set position.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="get_cursor"><code style="text-decoration:none">get_cursor</code><a href="#get_cursor" class="hash-link" aria-label="Direct link to get_cursor" title="Direct link to get_cursor">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L265"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">get_cursor</code><code>(</code><code>) → </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The cursor position.</p>
+</span></span></div><div>
+<p>Gets the current cursor position.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="get_size"><code style="text-decoration:none">get_size</code><a href="#get_size" class="hash-link" aria-label="Direct link to get_size" title="Direct link to get_size">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L275"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">get_size</code><code>(</code><code>) → </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The current written size.</p>
+</span></span></div><div>
+<p>Gets the current written size.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="get_capacity"><code style="text-decoration:none">get_capacity</code><a href="#get_capacity" class="hash-link" aria-label="Direct link to get_capacity" title="Direct link to get_capacity">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L284"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">get_capacity</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Returns the internal buffer capacity.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="set_vector_size"><code style="text-decoration:none">set_vector_size</code><a href="#set_vector_size" class="hash-link" aria-label="Direct link to set_vector_size" title="Direct link to set_vector_size">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L302"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">set_vector_size</code><code>(</code><div class="inset_uKQm"><div><code>to<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The vector size, must be either 3 or 4.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Sets the vector size. The given vector size cannot exceed the VMs
+  'LUA_VECTOR_SIZE' size.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="to_buffer"><code style="text-decoration:none">to_buffer</code><a href="#to_buffer" class="hash-link" aria-label="Direct link to to_buffer" title="Direct link to to_buffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L315"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">to_buffer</code><code>(</code><code>) → </code><code class="blue_P4bS">buffer</code><span class="inlineDescription_G7Er">-- <span>
+<p>The written data.</p>
+</span></span></div><div>
+<p>Returns a buffer containing the written data.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="to_string"><code style="text-decoration:none">to_string</code><a href="#to_string" class="hash-link" aria-label="Direct link to to_string" title="Direct link to to_string">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L326"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">to_string</code><code>(</code><code>) → </code><code class="blue_P4bS">buffer</code></div><div>
+<p>Returns a string containing the written data.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_u8"><code style="text-decoration:none">write_u8</code><a href="#write_u8" class="hash-link" aria-label="Direct link to write_u8" title="Direct link to write_u8">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L336"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_u8</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The u8 value to write.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Writes an unsigned 8 bit integer. Wraps around if provided a number
+  larger than 8 bits.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_u16"><code style="text-decoration:none">write_u16</code><a href="#write_u16" class="hash-link" aria-label="Direct link to write_u16" title="Direct link to write_u16">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L348"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_u16</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The u16 value to write.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Writes an unsigned 16 bit integer. Wraps around if provided a number
+  larger than 16 bits.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_u32"><code style="text-decoration:none">write_u32</code><a href="#write_u32" class="hash-link" aria-label="Direct link to write_u32" title="Direct link to write_u32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L360"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_u32</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The u32 value to write.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Writes an unsigned 32 bit integer. Wraps around if provided a number
+  larger than 32 bits.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_i8"><code style="text-decoration:none">write_i8</code><a href="#write_i8" class="hash-link" aria-label="Direct link to write_i8" title="Direct link to write_i8">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L372"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_i8</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The i8 value to write.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Writes an unsigned 8 bit integer. Wraps around if provided a number
+  larger than 8 bits.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_i16"><code style="text-decoration:none">write_i16</code><a href="#write_i16" class="hash-link" aria-label="Direct link to write_i16" title="Direct link to write_i16">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L384"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_i16</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The i16 value to write.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Writes an unsigned 16 bit integer. Wraps around if provided a number
+  larger than 16 bits.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_i32"><code style="text-decoration:none">write_i32</code><a href="#write_i32" class="hash-link" aria-label="Direct link to write_i32" title="Direct link to write_i32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L396"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_i32</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The i32 value to write.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Writes an unsigned 32 bit integer. Wraps around if provided a number
+  larger than 32 bits.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_f32"><code style="text-decoration:none">write_f32</code><a href="#write_f32" class="hash-link" aria-label="Direct link to write_f32" title="Direct link to write_f32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L408"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_f32</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The f32 value to write.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Writes a 32 bit floating point number. Wraps around if provided a number
+  larger than 32 bits.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_f64"><code style="text-decoration:none">write_f64</code><a href="#write_f64" class="hash-link" aria-label="Direct link to write_f64" title="Direct link to write_f64">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L419"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_f64</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The f64 value to write.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes a 64 bit floating point number.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_varint"><code style="text-decoration:none">write_varint</code><a href="#write_varint" class="hash-link" aria-label="Direct link to write_varint" title="Direct link to write_varint">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L430"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_varint</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
+<p>The varint to write.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes a ProtoBuf <a href="https://protobuf.dev/programming-guides/encoding/#varints">Base 128 Variable-width integer</a>.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_bool"><code style="text-decoration:none">write_bool</code><a href="#write_bool" class="hash-link" aria-label="Direct link to write_bool" title="Direct link to write_bool">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L446"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_bool</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">boolean</code><span class="inlineDescription_G7Er">-- <span>
+<p>The boolean to write.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes a boolean.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_null"><code style="text-decoration:none">write_null</code><a href="#write_null" class="hash-link" aria-label="Direct link to write_null" title="Direct link to write_null">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L453"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_null</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes a null byte.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_string"><code style="text-decoration:none">write_string</code><a href="#write_string" class="hash-link" aria-label="Direct link to write_string" title="Direct link to write_string">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L468"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_string</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The string to write.</p>
+</span></span></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The maximum size of the string.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Writes a string without a prefixed length, optionally trimmed to a
+  maximum size.
+</p>
+<p>
+  Note: You should ensure the binary format has a way of encoding the
+  strings size, as this function writes the string raw and doesn't write
+  any data a reader can use to determine the size.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_lstring"><code style="text-decoration:none">write_lstring</code><a href="#write_lstring" class="hash-link" aria-label="Direct link to write_lstring" title="Direct link to write_lstring">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L482"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_lstring</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The string to write.</p>
+</span></span></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The maximum size of the string.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes a length prefixed string.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_zstring"><code style="text-decoration:none">write_zstring</code><a href="#write_zstring" class="hash-link" aria-label="Direct link to write_zstring" title="Direct link to write_zstring">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L502"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_zstring</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The string to write.</p>
+</span></span></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The maximum size of the string.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes a null terminated (C Style) string.</p>
+
+  
+    
+    
+      <div class="admonition admonition-warning alert alert--warning">
+        <div class="admonition-heading">
+          <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                <path d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path>
+              </svg></span><span class="admonition-title">WARNING</span></h5>
+        </div>
+        <div class="admonition-content">
+          <p>
+            This function doesn't check whether the passed value is null-safe, and
+            will write the entire string regardless of embedded null bytes.
+          </p>
+          <p>
+            Consider wrapping the passed value with <code>byteparse.trim_zstring</code> if you
+            can't be sure there are no embedded null bytes.
+          </p>
+        </div>
+      </div>
+    
+  
+
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_buffer"><code style="text-decoration:none">write_buffer</code><a href="#write_buffer" class="hash-link" aria-label="Direct link to write_buffer" title="Direct link to write_buffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L519"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_buffer</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">buffer</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The buffer to write.</p>
+</span></span></div><div><code>offset<!-- -->: </code><code class="blue_P4bS">number?</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The starting offset from the buffer.</p>
+</span></span></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The amount of bytes from the buffer.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>
+  Writes a buffer without a prefixed length, optionally trimmed to a
+  maximum size.
+</p>
+<p>
+  Note: You should ensure the binary format has a way of encoding the
+  buffers size, as this function writes the buffer raw and doesn't write
+  any data a reader can use to determine the size.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_lbuffer"><code style="text-decoration:none">write_lbuffer</code><a href="#write_lbuffer" class="hash-link" aria-label="Direct link to write_lbuffer" title="Direct link to write_lbuffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L532"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_lbuffer</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">buffer</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The buffer to write.</p>
+</span></span></div><div><code>offset<!-- -->: </code><code class="blue_P4bS">number?</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The starting offset from the buffer.</p>
+</span></span></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The amount of bytes from the buffer.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes a length prefixed buffer.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_zbuffer"><code style="text-decoration:none">write_zbuffer</code><a href="#write_zbuffer" class="hash-link" aria-label="Direct link to write_zbuffer" title="Direct link to write_zbuffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L555"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_zbuffer</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">buffer</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The buffer to write.</p>
+</span></span></div><div><code>offset<!-- -->: </code><code class="blue_P4bS">number?</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The starting offset from the buffer.</p>
+</span></span></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code><span class="inlineDescription_G7Er">-- <span>
+<p>The amount of bytes from the buffer.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes a null terminated (C Style) buffer.</p>
+<p>Assumes the buffer is null safe.</p>
+
+  
+    
+    
+      <div class="admonition admonition-warning alert alert--warning">
+        <div class="admonition-heading">
+          <h5><span class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                <path d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path>
+              </svg></span><span class="admonition-title">WARNING</span></h5>
+        </div>
+        <div class="admonition-content">
+          <p>
+            This function doesn't check whether the passed value is null-safe, and
+            will write the entire buffer regardless of embedded null bytes.
+          </p>
+          <p>
+            Consider wrapping the passed value with <code>byteparse.trim_zbuffer</code> if you
+            can't be sure there are no embedded null bytes.
+          </p>
+        </div>
+      </div>
+    
+  
+
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_array"><code style="text-decoration:none">write_array</code><a href="#write_array" class="hash-link" aria-label="Direct link to write_array" title="Direct link to write_array">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L573"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_array</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">T</code><code class="purple_ieR2">}</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The buffer to write.</p>
+</span></span></div><div><code>encoder<!-- -->: </code><code class="purple_ieR2">(</code><div class="inset_uKQm"><code class="blue_P4bS">T</code><code class="purple_ieR2">,</code></div><div class="inset_uKQm"><code class="blue_P4bS">B...</code></div><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The encoder function.</p>
+</span></span></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
+<p>Additional data to pass to the encoder.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes a array without a prefixed length.</p>
+<p>Assumes the encoder function advances the cursor.</p>
+<p>
+  Note: You should ensure the binary format has a way of encoding the
+  arrays size, as this function doesn't write any data a reader can use
+  to determine the size.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_larray"><code style="text-decoration:none">write_larray</code><a href="#write_larray" class="hash-link" aria-label="Direct link to write_larray" title="Direct link to write_larray">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L588"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_larray</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">T</code><code class="purple_ieR2">}</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The buffer to write.</p>
+</span></span></div><div><code>encoder<!-- -->: </code><code class="purple_ieR2">(</code><div class="inset_uKQm"><code class="blue_P4bS">T</code><code class="purple_ieR2">,</code></div><div class="inset_uKQm"><code class="blue_P4bS">B...</code></div><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The encoder function.</p>
+</span></span></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
+<p>Additional data to pass to the encoder.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes a length prefixed array.</p>
+<p>Assumes the encoder function advances the cursor.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_zarray"><code style="text-decoration:none">write_zarray</code><a href="#write_zarray" class="hash-link" aria-label="Direct link to write_zarray" title="Direct link to write_zarray">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L603"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_zarray</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">T</code><code class="purple_ieR2">}</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The buffer to write.</p>
+</span></span></div><div><code>encoder<!-- -->: </code><code class="purple_ieR2">(</code><div class="inset_uKQm"><code class="blue_P4bS">T</code><code class="purple_ieR2">,</code></div><div class="inset_uKQm"><code class="blue_P4bS">B...</code></div><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>,</code><span class="inlineDescription_G7Er">-- <span>
+<p>The encoder function.</p>
+</span></span></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
+<p>Additional data to pass to the encoder.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes a null terminated array.</p>
+<p>
+  Assumes the encoder function advances the cursor. The encoder function
+  can freely emit null bytes <strong>after</strong> the first byte, provided it advances the cursor properly.
+</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_vector"><code style="text-decoration:none">write_vector</code><a href="#write_vector" class="hash-link" aria-label="Direct link to write_vector" title="Direct link to write_vector">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L613"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_vector</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">vector</code><span class="inlineDescription_G7Er">-- <span>
+<p>The vector to write.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes a vector.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_table"><code style="text-decoration:none">write_table</code><a href="#write_table" class="hash-link" aria-label="Direct link to write_table" title="Direct link to write_table">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L628"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_table</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">SerialisableTable</code><span class="inlineDescription_G7Er">-- <span>
+<p>The table to write.</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes a serialisable table.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_any"><code style="text-decoration:none">write_any</code><a href="#write_any" class="hash-link" aria-label="Direct link to write_any" title="Direct link to write_any">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L660"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_any</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">Serialisable</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes any serialisable type, with the Luau TValue prefixed.</p>
+</div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;set_capacity&quot;,
+            &quot;desc&quot;: &quot;Resizes the internal buffer to a set amount.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;to&quot;,
+                    &quot;desc&quot;: &quot;The new size.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 211,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;expand&quot;,
+            &quot;desc&quot;: &quot;Ensures the internal buffer can handle `needed_size` more data by \nexpanding the capacity if necessary.\n\nRelative to the cursor.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;needed_size&quot;,
+                    &quot;desc&quot;: &quot;The size amount needed.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 226,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;advance_write&quot;,
+            &quot;desc&quot;: &quot;Advances the write cursor by a set amount following a write.\nSets the written_size accordingly.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;by&quot;,
+                    &quot;desc&quot;: &quot;How much to advance the cursor.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;ignore&quot;: true,
+            &quot;source&quot;: {
+                &quot;line&quot;: 241,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;set_cursor&quot;,
+            &quot;desc&quot;: &quot;Sets the write cursor to a set position.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;to&quot;,
+                    &quot;desc&quot;: &quot;The position to move to.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 255,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;get_cursor&quot;,
+            &quot;desc&quot;: &quot;Gets the current cursor position.\n\n    &quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;The cursor position.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 265,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;get_size&quot;,
+            &quot;desc&quot;: &quot;Gets the current written size.\n\n    &quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;The current written size.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 275,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;get_capacity&quot;,
+            &quot;desc&quot;: &quot;Returns the internal buffer capacity.\n\n    &quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 284,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;set_vector_size&quot;,
+            &quot;desc&quot;: &quot;Sets the vector size. The given vector size cannot exceed the VMs\n&#x27;LUA_VECTOR_SIZE&#x27; size.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;to&quot;,
+                    &quot;desc&quot;: &quot;The vector size, must be either 3 or 4.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 302,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;to_buffer&quot;,
+            &quot;desc&quot;: &quot;Returns a buffer containing the written data.\n\n    &quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;The written data.&quot;,
+                    &quot;lua_type&quot;: &quot;buffer&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 315,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;to_string&quot;,
+            &quot;desc&quot;: &quot;Returns a string containing the written data.\n\n    &quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;buffer&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 326,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_u8&quot;,
+            &quot;desc&quot;: &quot;Writes an unsigned 8 bit integer. Wraps around if provided a number\nlarger than 8 bits.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The u8 value to write.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 336,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_u16&quot;,
+            &quot;desc&quot;: &quot;Writes an unsigned 16 bit integer. Wraps around if provided a number\nlarger than 16 bits.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The u16 value to write.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 348,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_u32&quot;,
+            &quot;desc&quot;: &quot;Writes an unsigned 32 bit integer. Wraps around if provided a number\nlarger than 32 bits.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The u32 value to write.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 360,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_i8&quot;,
+            &quot;desc&quot;: &quot;Writes an unsigned 8 bit integer. Wraps around if provided a number\nlarger than 8 bits.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The i8 value to write.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 372,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_i16&quot;,
+            &quot;desc&quot;: &quot;Writes an unsigned 16 bit integer. Wraps around if provided a number\nlarger than 16 bits.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The i16 value to write.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 384,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_i32&quot;,
+            &quot;desc&quot;: &quot;Writes an unsigned 32 bit integer. Wraps around if provided a number\nlarger than 32 bits.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The i32 value to write.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 396,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_f32&quot;,
+            &quot;desc&quot;: &quot;Writes a 32 bit floating point number. Wraps around if provided a number\nlarger than 32 bits.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The f32 value to write.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 408,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_f64&quot;,
+            &quot;desc&quot;: &quot;Writes a 64 bit floating point number.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The f64 value to write.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 419,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_varint&quot;,
+            &quot;desc&quot;: &quot;Writes a ProtoBuf [Base 128 Variable-width integer](https://protobuf.dev/programming-guides/encoding/#varints).\n    \n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The varint to write.&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 430,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_bool&quot;,
+            &quot;desc&quot;: &quot;Writes a boolean.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The boolean to write.&quot;,
+                    &quot;lua_type&quot;: &quot;boolean&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 446,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_null&quot;,
+            &quot;desc&quot;: &quot;Writes a null byte.\n    &quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 453,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_string&quot;,
+            &quot;desc&quot;: &quot;Writes a string without a prefixed length, optionally trimmed to a \nmaximum size.\n\nNote: You should ensure the binary format has a way of encoding the\nstrings size, as this function writes the string raw and doesn&#x27;t write\nany data a reader can use to determine the size.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The string to write.&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;size&quot;,
+                    &quot;desc&quot;: &quot;The maximum size of the string.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 468,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_lstring&quot;,
+            &quot;desc&quot;: &quot;Writes a length prefixed string.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The string to write.&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;size&quot;,
+                    &quot;desc&quot;: &quot;The maximum size of the string.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 482,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_zstring&quot;,
+            &quot;desc&quot;: &quot;Writes a null terminated (C Style) string. \n\n:::warning\nThis function doesn&#x27;t check whether the passed value is null-safe, and\nwill write the entire string regardless of embedded null bytes.\n\nConsider wrapping the passed value with `byteparse.trim_zstring` if you\ncan&#x27;t be sure there are no embedded null bytes.\n:::\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The string to write.&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;size&quot;,
+                    &quot;desc&quot;: &quot;The maximum size of the string.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 502,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_buffer&quot;,
+            &quot;desc&quot;: &quot;Writes a buffer without a prefixed length, optionally trimmed to a \nmaximum size.\n\nNote: You should ensure the binary format has a way of encoding the\nbuffers size, as this function writes the buffer raw and doesn&#x27;t write\nany data a reader can use to determine the size.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The buffer to write.&quot;,
+                    &quot;lua_type&quot;: &quot;buffer&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;offset&quot;,
+                    &quot;desc&quot;: &quot;The starting offset from the buffer.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;size&quot;,
+                    &quot;desc&quot;: &quot;The amount of bytes from the buffer.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 519,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_lbuffer&quot;,
+            &quot;desc&quot;: &quot;Writes a length prefixed buffer.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The buffer to write.&quot;,
+                    &quot;lua_type&quot;: &quot;buffer&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;offset&quot;,
+                    &quot;desc&quot;: &quot;The starting offset from the buffer.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;size&quot;,
+                    &quot;desc&quot;: &quot;The amount of bytes from the buffer.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 532,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_zbuffer&quot;,
+            &quot;desc&quot;: &quot;Writes a null terminated (C Style) buffer.\n\nAssumes the buffer is null safe.\n\n:::warning\nThis function doesn&#x27;t check whether the passed value is null-safe, and\nwill write the entire buffer regardless of embedded null bytes.\n\nConsider wrapping the passed value with `byteparse.trim_zbuffer` if you\ncan&#x27;t be sure there are no embedded null bytes.\n:::\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The buffer to write.&quot;,
+                    &quot;lua_type&quot;: &quot;buffer&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;offset&quot;,
+                    &quot;desc&quot;: &quot;The starting offset from the buffer.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;size&quot;,
+                    &quot;desc&quot;: &quot;The amount of bytes from the buffer.&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 555,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_array&quot;,
+            &quot;desc&quot;: &quot;Writes a array without a prefixed length.\n\nAssumes the encoder function advances the cursor.\n\nNote: You should ensure the binary format has a way of encoding the\narrays size, as this function doesn&#x27;t write any data a reader can use\nto determine the size.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The buffer to write.&quot;,
+                    &quot;lua_type&quot;: &quot;{T}&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;encoder&quot;,
+                    &quot;desc&quot;: &quot;The encoder function.&quot;,
+                    &quot;lua_type&quot;: &quot;(T, B...) -&gt; ()&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;...&quot;,
+                    &quot;desc&quot;: &quot;Additional data to pass to the encoder.&quot;,
+                    &quot;lua_type&quot;: &quot;B...&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 573,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_larray&quot;,
+            &quot;desc&quot;: &quot;Writes a length prefixed array.\n\nAssumes the encoder function advances the cursor.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The buffer to write.&quot;,
+                    &quot;lua_type&quot;: &quot;{T}&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;encoder&quot;,
+                    &quot;desc&quot;: &quot;The encoder function.&quot;,
+                    &quot;lua_type&quot;: &quot;(T, B...) -&gt; ()&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;...&quot;,
+                    &quot;desc&quot;: &quot;Additional data to pass to the encoder.&quot;,
+                    &quot;lua_type&quot;: &quot;B...&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 588,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_zarray&quot;,
+            &quot;desc&quot;: &quot;Writes a null terminated array.\n\nAssumes the encoder function advances the cursor. The encoder function\ncan freely emit null bytes **after** the first byte, provided it advances the cursor properly.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The buffer to write.&quot;,
+                    &quot;lua_type&quot;: &quot;{T}&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;encoder&quot;,
+                    &quot;desc&quot;: &quot;The encoder function.&quot;,
+                    &quot;lua_type&quot;: &quot;(T, B...) -&gt; ()&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;...&quot;,
+                    &quot;desc&quot;: &quot;Additional data to pass to the encoder.&quot;,
+                    &quot;lua_type&quot;: &quot;B...&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 603,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_vector&quot;,
+            &quot;desc&quot;: &quot;Writes a vector.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The vector to write.&quot;,
+                    &quot;lua_type&quot;: &quot;vector&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 613,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_table&quot;,
+            &quot;desc&quot;: &quot;Writes a serialisable table.\n\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;The table to write.&quot;,
+                    &quot;lua_type&quot;: &quot;SerialisableTable&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 628,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_any&quot;,
+            &quot;desc&quot;: &quot;Writes any serialisable type, with the Luau TValue prefixed.\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Serialisable&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 660,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        }
+    ],
+    &quot;properties&quot;: [],
+    &quot;types&quot;: [],
+    &quot;name&quot;: &quot;writer&quot;,
+    &quot;desc&quot;: &quot;writer instance used to serialise to binary formats.\n\n    &quot;,
+    &quot;source&quot;: {
+        &quot;line&quot;: 203,
+        &quot;path&quot;: &quot;lib/init.luau&quot;
+    }
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#expand" class="table-of-contents__link toc-highlight">.expand</a></li><li><a href="#get_capacity" class="table-of-contents__link toc-highlight">.get_capacity</a></li><li><a href="#get_cursor" class="table-of-contents__link toc-highlight">.get_cursor</a></li><li><a href="#get_size" class="table-of-contents__link toc-highlight">.get_size</a></li><li><a href="#set_capacity" class="table-of-contents__link toc-highlight">.set_capacity</a></li><li><a href="#set_cursor" class="table-of-contents__link toc-highlight">.set_cursor</a></li><li><a href="#set_vector_size" class="table-of-contents__link toc-highlight">.set_vector_size</a></li><li><a href="#to_buffer" class="table-of-contents__link toc-highlight">.to_buffer</a></li><li><a href="#to_string" class="table-of-contents__link toc-highlight">.to_string</a></li><li><a href="#write_any" class="table-of-contents__link toc-highlight">.write_any</a></li><li><a href="#write_array" class="table-of-contents__link toc-highlight">.write_array</a></li><li><a href="#write_bool" class="table-of-contents__link toc-highlight">.write_bool</a></li><li><a href="#write_buffer" class="table-of-contents__link toc-highlight">.write_buffer</a></li><li><a href="#write_f32" class="table-of-contents__link toc-highlight">.write_f32</a></li><li><a href="#write_f64" class="table-of-contents__link toc-highlight">.write_f64</a></li><li><a href="#write_i16" class="table-of-contents__link toc-highlight">.write_i16</a></li><li><a href="#write_i32" class="table-of-contents__link toc-highlight">.write_i32</a></li><li><a href="#write_i8" class="table-of-contents__link toc-highlight">.write_i8</a></li><li><a href="#write_larray" class="table-of-contents__link toc-highlight">.write_larray</a></li><li><a href="#write_lbuffer" class="table-of-contents__link toc-highlight">.write_lbuffer</a></li><li><a href="#write_lstring" class="table-of-contents__link toc-highlight">.write_lstring</a></li><li><a href="#write_null" class="table-of-contents__link toc-highlight">.write_null</a></li><li><a href="#write_string" class="table-of-contents__link toc-highlight">.write_string</a></li><li><a href="#write_table" class="table-of-contents__link toc-highlight">.write_table</a></li><li><a href="#write_u16" class="table-of-contents__link toc-highlight">.write_u16</a></li><li><a href="#write_u32" class="table-of-contents__link toc-highlight">.write_u32</a></li><li><a href="#write_u8" class="table-of-contents__link toc-highlight">.write_u8</a></li><li><a href="#write_varint" class="table-of-contents__link toc-highlight">.write_varint</a></li><li><a href="#write_vector" class="table-of-contents__link toc-highlight">.write_vector</a></li><li><a href="#write_zarray" class="table-of-contents__link toc-highlight">.write_zarray</a></li><li><a href="#write_zbuffer" class="table-of-contents__link toc-highlight">.write_zbuffer</a></li><li><a href="#write_zstring" class="table-of-contents__link toc-highlight">.write_zstring</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright plainenglish © 2025. Built with Moonwave and Docusaurus</div></div></div></footer></div>
+</body>
+</html>
