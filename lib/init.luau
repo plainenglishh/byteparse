@@ -1,5 +1,5 @@
 --[[
-    plainenglishh/byteparse v1.0.0
+    plainenglishh/byteparse v1.1.0
    
     Pure-luau library for serialising and deserialising binary formats.
 ]]
@@ -33,7 +33,7 @@
 --!strict
 --!nolint LocalShadow
 
-local _BYTEPARSE_VERSION = "v1.0.0";
+local _BYTEPARSE_VERSION = "v1.1.0";
 
 export type u8 = number;
 export type u16 = number;
@@ -52,7 +52,7 @@ export type SerialisableArray = {Serialisable};
 export type SerialisableTable = {[Serialisable]: Serialisable};
 
 local function warn_vector_lib()
-    if type(vector) ~= "table" then
+    if not _G.BYTEPARSE_SUPPRESS_WARNINGS and type(vector) ~= "table" then
         print(`[byteparse WARN]: expected global 'vector' to be a table, got {type(vector)}`);
         if type(vector) == "function" then
             print(`[byteparse WARN]: this is likely caused by mlua, which sets 'vector' to a function instead of the builtin vector library. either switch runtimes or polyfill 'vector'`);
@@ -102,7 +102,7 @@ type TableParts = {
 local byteparse = {};
 
 --[=[
-    Utility function for extracting the hash and array parts from a table.
+    Extracts the hash and array parts from a table.
 
     @within byteparse
     @private
@@ -142,7 +142,7 @@ function byteparse.get_table_parts(tbl: {[any]: any})
 end
 
 --[=[
-    Removes the first encountered null byte, and all following data, from a buffer.
+    Removes the first encountered null byte (and all following data) from a buffer.
 
     @param buf buffer
     @return buffer
@@ -161,7 +161,7 @@ function byteparse.trim_zbuffer(buf: buffer): buffer
 end
 
 --[=[
-    Removes the first encountered null byte, and all following data, from a string.
+    Removes the first encountered null byte (and all following data) from a string.
 
     @param str string
     @return string
@@ -170,8 +170,25 @@ function byteparse.trim_zstring(str: string): string
     return string.gsub(str, "%z.+$", "");
 end
 
+
 --[=[
-    The byteparse version.
+    Appends a null terminator to the end of a string.
+]=]
+function byteparse.zterm_string(str: string): string
+    return `{str}\0`;
+end
+
+--[=[
+    Appends a null terminator to the end of a buffer.
+]=]
+function byteparse.zterm_buffer(buf: buffer): buffer
+    local new_buf = buffer.create(buffer.len(buf) + 1);
+    buffer.copy(new_buf, 0, buf, 0);
+    return new_buf;
+end
+
+--[=[
+    The library version as a semver string. E.g `v1.0.0`
 
     @within byteparse
     @prop version string
@@ -179,11 +196,10 @@ end
 byteparse.version = _BYTEPARSE_VERSION;
 
 --[=[
-    Creates a blank writer instance.
+    Creates a writer instance with a given starting size and expansion rate.
 
-    @param start_size number -- The initial size of the writer buffer.
-    @param expansion_rate number? -- Specifies the expansion rate when attempting to write more data than the internal buffer can take.
-    @return writer -- The new writer instance.
+    @param expansion_rate number? -- Multiplier used to resize the internal buffer when attempting to write more data than the internal buffer can take.
+    @return writer
 ]=]
 function byteparse.writer(start_size: number, expansion_rate: number?)
     warn_vector_lib();
@@ -196,50 +212,46 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
     local vector_size = 3;
     
     --[=[
-        writer instance used to serialise to binary formats.
-
+        Writer instance used to serialise to binary formats.
         @class writer
     ]=]
     local writer = {};
 
     --[=[
-        Resizes the internal buffer to a set amount.
+        Resizes the internal buffer to a given size.
 
         @within writer
-        @param to number -- The new size.
     ]=]
-    local function set_capacity(to: number)
-        local new_b = buffer.create(to);
+    local function set_capacity(new_size: number)
+        local new_b = buffer.create(new_size);
         buffer.copy(new_b, 0, b);
         b = new_b;
     end
 
     --[=[
-        Ensures the internal buffer can handle `needed_size` more data by 
+        Ensures the internal buffer can handle `extra_size` more data by 
         expanding the capacity if necessary.
 
-        Relative to the cursor.
+        Resizes relative to the cursor.
 
         @within writer
-        @param needed_size number -- The size amount needed.
     ]=]
-    local function expand(needed_size: number)
+    local function expand(extra_size: number)
         local size = buffer.len(b);
-        if cursor + needed_size > size then
-            set_capacity((size + needed_size) * expansion_rate);
+        if cursor + extra_size > size then
+            set_capacity((size + extra_size) * expansion_rate);
         end 
     end
 
     --[=[
         Advances the write cursor by a set amount following a write.
-        Sets the written_size accordingly.
+        Updates the written_size accordingly.
 
         @within writer
         @ignore
-        @param by number -- How much to advance the cursor.
     ]=]
-    local function advance_write(by: number)
-        cursor += by;
+    local function advance_write(offset: number)
+        cursor += offset;
 
         if cursor > written_size then
             written_size = cursor;
@@ -247,32 +259,29 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
     end
 
     --[=[
-        Sets the write cursor to a set position.
+        Sets the write cursor to a given position.
 
         @within writer
-        @param to number -- The position to move to.
     ]=]
-    local function set_cursor(to: number)
-        cursor = to;
+    local function set_cursor(position: number)
+        cursor = position;
     end
 
     --[=[
-        Gets the current cursor position.
+        Returns the current cursor position.
 
         @within writer
-        @return number -- The cursor position.
     ]=]
-    local function get_cursor()
+    local function get_cursor(): number
         return cursor;
     end
 
     --[=[
-        Gets the current written size.
+        Returns the current written size.
 
         @within writer
-        @return number -- The current written size.
     ]=]
-    local function get_size()
+    local function get_size(): number
         return written_size;
     end
 
@@ -281,7 +290,7 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
 
         @within writer
     ]=]
-    local function get_capacity()
+    local function get_capacity(): number
         return buffer.len(b);
     end
 
@@ -292,25 +301,22 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
     writer.get_capacity = get_capacity;
     writer.get_size = get_size;
 
-
     --[=[
         Sets the vector size. The given vector size cannot exceed the VMs
         'LUA_VECTOR_SIZE' size.
 
-        @param to number -- The vector size, must be either 3 or 4.
+        @param vec_size number -- The vector size, must be either 3 or 4.
     ]=]
-    function writer.set_vector_size(to: number)
-        if to ~= 3 and to ~= 4 then
+    function writer.set_vector_size(vec_size: number)
+        if vec_size ~= 3 and vec_size ~= 4 then
             error("vector size must be either 3 or 4", 2);
         end
 
-        vector_size = to;
+        vector_size = vec_size;
     end
 
     --[=[
         Returns a buffer containing the written data.
-
-        @return buffer -- The written data.
     ]=]
     function writer.to_buffer(): buffer
         local out_buf = buffer.create(written_size);
@@ -320,8 +326,6 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
 
     --[=[
         Returns a string containing the written data.
-
-        @return buffer -- 
     ]=]
     function writer.to_string(): string
         return buffer.tostring(writer.to_buffer());
@@ -330,8 +334,6 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
     --[=[
         Writes an unsigned 8 bit integer. Wraps around if provided a number
         larger than 8 bits.
-        
-        @param value number -- The u8 value to write.
     ]=]
     function writer.write_u8(value: u8)
         expand(1);
@@ -342,8 +344,6 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
     --[=[
         Writes an unsigned 16 bit integer. Wraps around if provided a number
         larger than 16 bits.
-
-        @param value number -- The u16 value to write.
     ]=]
     function writer.write_u16(value: u16)
         expand(2);
@@ -354,8 +354,6 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
     --[=[
         Writes an unsigned 32 bit integer. Wraps around if provided a number
         larger than 32 bits.
-
-        @param value number -- The u32 value to write.
     ]=]
     function writer.write_u32(value: u32) 
         expand(4);
@@ -366,8 +364,6 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
     --[=[
         Writes an unsigned 8 bit integer. Wraps around if provided a number
         larger than 8 bits.
-
-        @param value number -- The i8 value to write.
     ]=]
     function writer.write_i8(value: i8)
         expand(1);
@@ -378,8 +374,6 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
     --[=[
         Writes an unsigned 16 bit integer. Wraps around if provided a number
         larger than 16 bits.
-
-        @param value number -- The i16 value to write.
     ]=]
     function writer.write_i16(value: i16)
         expand(2);
@@ -390,8 +384,6 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
     --[=[
         Writes an unsigned 32 bit integer. Wraps around if provided a number
         larger than 32 bits.
-
-        @param value number -- The i32 value to write.
     ]=]
     function writer.write_i32(value: i32) 
         expand(4);
@@ -402,8 +394,6 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
     --[=[
         Writes a 32 bit floating point number. Wraps around if provided a number
         larger than 32 bits.
-
-        @param value number -- The f32 value to write.
     ]=]
     function writer.write_f32(value: f32)
         expand(4);
@@ -413,8 +403,6 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
 
     --[=[
         Writes a 64 bit floating point number.
-
-        @param value number -- The f64 value to write.
     ]=]
     function writer.write_f64(value: f64) 
         expand(8);
@@ -424,8 +412,6 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
 
     --[=[
         Writes a ProtoBuf [Base 128 Variable-width integer](https://protobuf.dev/programming-guides/encoding/#varints).
-    
-        @param value number -- The varint to write.
     ]=]
     function writer.write_varint(value: varint) 
         local n = value;
@@ -440,8 +426,6 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
 
     --[=[
         Writes a boolean.
-
-        @param value boolean -- The boolean to write.
     ]=]
     function writer.write_bool(value: boolean)
         writer.write_u8(if value then 1 else 0);
@@ -455,29 +439,29 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
     end
 
     --[=[
-        Writes a string without a prefixed length, optionally trimmed to a 
-        maximum size.
+        Writes a string without a prefixed length, optionally trimmed/padded to 
+        a given size.
 
         Note: You should ensure the binary format has a way of encoding the
         strings size, as this function writes the string raw and doesn't write
         any data a reader can use to determine the size.
-
-        @param value string -- The string to write.
-        @param size number? -- The maximum size of the string.
     ]=]
     function writer.write_string(value: string, size: number?)
         local size = size or #value;
+        local real_size = math.min(#value, size);
 
         expand(size);
-        buffer.writestring(b, cursor, value, size);
+        buffer.fill(b, cursor, 0, size);
+        buffer.writestring(b, cursor, value, real_size);
+        --[[if size > #value then
+            local size_remaining = size - real_size;
+        end]]
+
         advance_write(size);
     end
 
     --[=[
         Writes a length prefixed string.
-
-        @param value string -- The string to write.
-        @param size number? -- The maximum size of the string.
     ]=]
     function writer.write_lstring(value: string, size: number?)
         local size = size or #value;
@@ -488,6 +472,10 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
     --[=[
         Writes a null terminated (C Style) string. 
         
+        When passed `size`, trims the string to `size` or pads the end with zeros.
+        The `size` parameters specifies the length of the string buffer, and
+        includes the null-terminator.
+
         :::warning
         This function doesn't check whether the passed value is null-safe, and
         will write the entire string regardless of embedded null bytes.
@@ -495,39 +483,40 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
         Consider wrapping the passed value with `byteparse.trim_zstring` if you
         can't be sure there are no embedded null bytes.
         :::
-
-        @param value string -- The string to write.
-        @param size number? -- The maximum size of the string.
     ]=]
     function writer.write_zstring(value: string, size: number?)
-        writer.write_string(value, size);
-        writer.write_null();
+        if size then
+            value = string.sub(value, 1, size - 1);
+        end
+
+        writer.write_string(byteparse.zterm_string(value), size);
     end
 
     --[=[
-        Writes a buffer without a prefixed length, optionally trimmed to a 
-        maximum size.
+        Writes a buffer without a prefixed length, optionally trimmed or null
+        padded to to a specified size.
 
         Note: You should ensure the binary format has a way of encoding the
         buffers size, as this function writes the buffer raw and doesn't write
         any data a reader can use to determine the size.
-
-        @param value buffer -- The buffer to write.
-        @param offset number? -- The starting offset from the buffer.
-        @param size number? -- The amount of bytes from the buffer.
     ]=]
     function writer.write_buffer(value: buffer, offset: number?, size: number?)
-        expand(buffer.len(value));
-        buffer.copy(b, cursor, value, offset, size);
-        advance_write((size or buffer.len(value) - (offset or 0)));
+        local size = size or buffer.len(value);
+        local real_size = math.min(buffer.len(value), size) - (offset or 0);
+        expand(size);
+        buffer.copy(b, cursor, value, offset, real_size);
+        
+        if size > buffer.len(value) then
+            local size_remaining = size - real_size;
+            buffer.fill(b, cursor + real_size, 0, size_remaining);
+            advance_write(size_remaining);
+        end
+
+        advance_write(size);
     end
 
     --[=[
         Writes a length prefixed buffer.
-
-        @param value buffer -- The buffer to write.
-        @param offset number? -- The starting offset from the buffer.
-        @param size number? -- The amount of bytes from the buffer.
     ]=]
     function writer.write_lbuffer(value: buffer, offset: number?, size: number?)
         local size = size or buffer.len(value);
@@ -547,14 +536,9 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
         Consider wrapping the passed value with `byteparse.trim_zbuffer` if you
         can't be sure there are no embedded null bytes.
         :::
-
-        @param value buffer -- The buffer to write.
-        @param offset number? -- The starting offset from the buffer.
-        @param size number? -- The amount of bytes from the buffer.
     ]=]
     function writer.write_zbuffer(value: buffer, offset: number?, size: number?)
-        writer.write_buffer(value, offset, size);
-        writer.write_null();
+        writer.write_buffer(byteparse.zterm_buffer(value), offset, size);
     end
 
     --[=[
@@ -566,9 +550,7 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
         arrays size, as this function doesn't write any data a reader can use
         to determine the size.
 
-        @param value {T} -- The buffer to write.
-        @param encoder (T, B...) -> () -- The encoder function.
-        @param ... B... -- Additional data to pass to the encoder.
+        @param ... B... -- Additional parameters to pass to the encoder.
     ]=]
     function writer.write_array<T, B...>(value: {T}, encoder: (T) -> (), ...: B...)
         for _, v in value do
@@ -581,9 +563,7 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
 
         Assumes the encoder function advances the cursor.
 
-        @param value {T} -- The buffer to write.
-        @param encoder (T, B...) -> () -- The encoder function.
-        @param ... B... -- Additional data to pass to the encoder.
+        @param ... B... -- Additional parameters to pass to the encoder.
     ]=]
     function writer.write_larray<T, B...>(value: {T}, encoder: (T) -> (), ...: B...)
         writer.write_varint(#value);
@@ -596,9 +576,7 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
         Assumes the encoder function advances the cursor. The encoder function
         can freely emit null bytes **after** the first byte, provided it advances the cursor properly.
 
-        @param value {T} -- The buffer to write.
-        @param encoder (T, B...) -> () -- The encoder function.
-        @param ... B... -- Additional data to pass to the encoder.
+        @param ... B... -- Additional parameters to pass to the encoder.
     ]=]
     function writer.write_zarray<T, B...>(value: {T}, encoder: (T) -> (), ...: B...)
         writer.write_array(value, encoder, ...);
@@ -607,8 +585,6 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
 
     --[=[
         Writes a vector.
-
-        @param value vector -- The vector to write.
     ]=]
     function writer.write_vector(value: vector)
         writer.write_f32(value.x);
@@ -622,8 +598,6 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
 
     --[=[
         Writes a serialisable table.
-
-        @param value SerialisableTable -- The table to write.
     ]=]
     function writer.write_table(value: SerialisableTable)
         local parts = byteparse.get_table_parts(value);
@@ -666,9 +640,9 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
         elseif type(value) == "number" then
             writer.write_u8(TYPE_IDS.NUMBER);
             writer.write_f64(value);
-        elseif type(value) == "vector" then
+        elseif type(value) == "vector" or (type(value) == "table" and getmetatable(value) and getmetatable(value).__type == "vector") then
             writer.write_u8(TYPE_IDS.VECTOR);
-            writer.write_vector(value);
+            writer.write_vector(value :: any);
         elseif type(value) == "string" then
             writer.write_u8(TYPE_IDS.STRING);
             writer.write_lstring(value);
@@ -687,8 +661,6 @@ end
 --[=[
     Creates a reader instance from a buffer.
 
-    @within byteparse
-    @param b buffer -- The buffer to read from.
     @return reader -- The new reader instance.
 ]=]
 function byteparse.reader(b: buffer)
@@ -702,29 +674,26 @@ function byteparse.reader(b: buffer)
 
         @within reader
         @ignore
-        @param by number -- How much to advance the cursor.
     ]=]
-    local function advance(by: number)
-        cursor += by;
+    local function advance(offset: number)
+        cursor += offset;
     end
 
     --[=[
         Sets the read cursor to a set position.
 
         @within reader
-        @param to number -- The position to move to.
     ]=]
-    local function set_cursor(to: number)
-        cursor = to;
+    local function set_cursor(position: number)
+        cursor = position;
     end
 
     --[=[
-        Gets the current cursor position.
+        Returns the current cursor position.
 
         @within reader
-        @return number -- The cursor position.
     ]=]
-    local function get_cursor()
+    local function get_cursor(): number
         return cursor;
     end
 
@@ -742,22 +711,18 @@ function byteparse.reader(b: buffer)
         Sets the vector size. The given vector size cannot exceed the VMs
         'LUA_VECTOR_SIZE' size.
 
-        @within reader
-        @param to number -- The vector size, must be either 3 or 4.
+        @param vec_size number -- The vector size, must be either 3 or 4.
     ]=]
-    function reader.set_vector_size(to: number)
-        if to ~= 3 and to ~= 4 then
+    function reader.set_vector_size(vec_size: number)
+        if vec_size ~= 3 and vec_size ~= 4 then
             error("vector size must be either 3 or 4", 2);
         end
 
-        vector_size = to;
+        vector_size = vec_size;
     end
 
     --[=[
         Reads an unsigned 8 bit integer.
-
-        @within reader
-        @return number -- The read value.
     ]=]
     function reader.read_u8(): u8
         local value = buffer.readu8(b, cursor);
@@ -767,9 +732,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads an unsigned 16 bit integer.
-
-        @within reader
-        @return number -- The read value.
     ]=]
     function reader.read_u16(): u16
         local value = buffer.readu16(b, cursor);
@@ -779,9 +741,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads an unsigned 32 bit integer.
-
-        @within reader
-        @return number -- The read value.
     ]=]
     function reader.read_u32(): u32
         local value = buffer.readu32(b, cursor);
@@ -791,9 +750,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a signed 8 bit integer.
-
-        @within reader
-        @return number -- The read value.
     ]=]
     function reader.read_i8(): i8
         local value = buffer.readi8(b, cursor);
@@ -803,9 +759,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a signed 16 bit integer.
-
-        @within reader
-        @return number -- The read value.
     ]=]
     function reader.read_i16(): i16
         local value = buffer.readi16(b, cursor);
@@ -815,9 +768,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a signed 32 bit integer.
-
-        @within reader
-        @return number -- The read value.
     ]=]
     function reader.read_i32(): i32
         local value = buffer.readi32(b, cursor);
@@ -827,9 +777,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a 32 bit floating point number.
-
-        @within reader
-        @return number -- The read value.
     ]=]
     function reader.read_f32(): f32
         local value = buffer.readf32(b, cursor);
@@ -839,9 +786,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a 64 bit floating point number.
-
-        @within reader
-        @return number -- The read value.
     ]=]
     function reader.read_f64(): f64
         local value = buffer.readf64(b, cursor);
@@ -851,9 +795,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a ProtoBuf [Base 128 Variable-width integer](https://protobuf.dev/programming-guides/encoding/#varints).
-    
-        @within reader
-        @return number -- The read value.
     ]=]
     function reader.read_varint(): varint 
         -- Inspired by fiu's implementation
@@ -870,9 +811,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a boolean.
-
-        @within reader
-        @return boolean -- The read boolean.
     ]=]
     function reader.read_bool(): boolean
         return reader.read_u8() == 1;
@@ -880,10 +818,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a string.
-
-        @within reader
-        @param length number? -- The string length.
-        @return string -- The read string.
     ]=]
     function reader.read_string(length: number): string
         local value = buffer.readstring(b, cursor, length);
@@ -893,9 +827,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a length prefixed string.
-
-        @within reader
-        @return string -- The read string.
     ]=]
     function reader.read_lstring(): string
         local length = reader.read_varint();
@@ -905,15 +836,26 @@ function byteparse.reader(b: buffer)
     --[=[
         Reads a null terminated string.
 
-        @within reader
-        @return string -- The read string.
+        If `size` is provided, this function will consume the entire string
+        buffer, disregarding data past the first null byte. If no null byte is
+        encountered when the entire `size` has been read, it returns what has
+        been already been read and exits.
     ]=]
-    function reader.read_zstring(): string
+    function reader.read_zstring(size: number?): string
         local start = cursor;
         while true do
             local byte = reader.read_u8();
-            if byte == 0 then
-                return buffer.readstring(b, start, cursor - start - 1);
+            local length = cursor - start;
+
+            if byte == 0 or (size and size == length) then
+                if size then
+                    local remaining_space = size - length;
+                    if remaining_space > 0 then
+                        advance(remaining_space);
+                    end
+                end
+                
+                return buffer.readstring(b, start, length - 1);
             else
                 continue;
             end
@@ -922,9 +864,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a buffer.
-
-        @within reader
-        @return buffer -- The read buffer.
     ]=]
     function reader.read_buffer(length: number): buffer
         local value = buffer.create(length);
@@ -935,9 +874,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a length prefixed buffer.
-       
-        @within reader
-        @return buffer -- The read buffer.
     ]=]
     function reader.read_lbuffer(): buffer
         local length = reader.read_varint();
@@ -946,9 +882,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a null terminated buffer.
-
-        @within reader
-        @return buffer -- The read buffer.
     ]=]
     function reader.read_zbuffer(): buffer
         local start = cursor;
@@ -970,11 +903,7 @@ function byteparse.reader(b: buffer)
         Assumes `decoder` advances the cursor.
         Stops reading if the decoder returns nil.
 
-        @within reader
-        @param size number -- Amount of values to read, or -1 to read until the decoder returns nil.
-        @param decoder (B...) -> T? -- Function to read values, or terminate if nil is returned.
-        @param ... B... -- Additional data to pass to the decoder.
-        @return {T} -- Array of read values.
+        @param ... B... -- Additional parameters to pass to the decoder.
     ]=]
     function reader.read_array<T, B...>(size: number, decoder: (B...) -> T?, ...: B...): {T}
         local values = {};
@@ -1007,10 +936,7 @@ function byteparse.reader(b: buffer)
         Assumes `decoder` advances the cursor.
         Stops reading if the decoder returns nil.
 
-        @within reader
-        @param decoder (B...) -> T? -- Function to read values, or terminate if nil is returned.
-        @param ... B... -- Additional data to pass to the decoder.
-        @return {T} -- Array of read values.
+        @param ... B... -- Additional parameters to pass to the decoder.
     ]=]
     function reader.read_larray<T, B...>(decoder: (B...) -> T?, ...: B...): {T}
         local size = reader.read_varint();
@@ -1023,10 +949,7 @@ function byteparse.reader(b: buffer)
         Assumes `decoder` advances the cursor.
         Stops reading if the next byte is `0`, or if the decoder returns nil.
 
-        @within reader
-        @param decoder (B...) -> T? -- Function to read values, or terminate if nil is returned.
-        @param ... B... -- Additional data to pass to the decoder.
-        @return {T} -- Array of read values.
+        @param ... B... -- Additional parameters to pass to the decoder.
     ]=]
     function reader.read_zarray<T, B...>(decoder: (B...) -> T?, ...: B...): {T}
         local values = {};
@@ -1047,9 +970,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a vector.
-
-        @within reader
-        @return vector -- The read vector.
     ]=]
     function reader.read_vector(): vector
         local x = reader.read_f32();
@@ -1066,9 +986,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a table.
-    
-        @within reader
-        @return SerialisableTable -- The read table.
     ]=]
     function reader.read_table(): SerialisableTable
         local flags = reader.read_u8();
@@ -1099,9 +1016,6 @@ function byteparse.reader(b: buffer)
 
     --[=[
         Reads a type-prefixed value.
-
-        @within reader
-        @return Serialisable -- The read value.
     ]=]
     function reader.read_any(): Serialisable
         local type_id = reader.read_u8();

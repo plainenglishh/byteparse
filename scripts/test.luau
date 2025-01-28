@@ -1,17 +1,22 @@
+--!nolint LocalShadow
+
 local stdio = require("@lune/stdio");
 local luau = require("@lune/luau");
 local serde = require("@lune/serde");
 local byteparse = require("../lib");
 
-local function tbl_eq(a: any, b: any): boolean
-    return serde.encode("json", a) == serde.encode("json", b);
+local function assert_tbl_eq(a: any, b: any): boolean
+    return assert(serde.encode("json", a) == serde.encode("json", b), "tables arent equal");
 end
 
 local tests = {};
 
+type TestFn = (name: string, fn: () -> ()) -> ();
+type TestGroupFn = (name: string, fn: (test: TestFn, test_group: TestGroupFn) -> ()) -> ();
+
 local function test(name: string, fn: () -> ())
     table.insert(tests, {
-        name = `byteparse::{name}`,
+        name = `{name}`,
         fn = fn,
     });
 end
@@ -29,17 +34,58 @@ if type(vector) == "function" then
             }, {
                 __eq = function(a, b)
                     return (a.x == b.x) and (a.y == b.y) and (a.z == b.z) and (a.w == b.w);
-                end
+                end,
+                __type = "vector",
             });
         end,
     };
 end
 
+local function assert_buffer_eq(buf: buffer, eq_to: string)
+    local eq_to = string.gsub(eq_to, "%X", "");
+    local bytes = {};
+    
+    for i = 1, #eq_to, 2  do
+        local byte = tonumber(string.sub(eq_to, i, i + 1), 16) or error("expected hex value");
+        table.insert(bytes, byte);
+    end
+
+    if buffer.len(buf) ~= #bytes then
+        error(`buffers should be of equal length, a = {buffer.len(buf)}, b = {#bytes}`);
+    end
+
+    for i = 0, buffer.len(buf) - 1 do
+        local a = buffer.readu8(buf, i);
+        local b = bytes[i + 1];
+        if a ~= b then
+            error(`expected byte at offset {i} to be {string.format("%02X", b)}, got {string.format("%02X", a)} instead`)
+        end
+    end
+end
+
+local function dump(buf: buffer|string)
+    local buf = if type(buf) == "string" then buffer.fromstring(buf) else buf;
+    local str = "";
+    for i = 0, buffer.len(buf) - 1 do
+        str ..= string.format("%02X ", buffer.readu8(buf, i));
+    end
+    return (str);
+end
+
+local function buffer_from(hex: string)
+    local writer = byteparse.writer(100);
+    for i = 1, #hex, 2  do
+        local byte = tonumber(string.sub(hex, i, i + 1), 16) or error("expected hex value");
+        writer.write_u8(byte);
+    end
+    return writer.to_buffer();
+end
+
 --------------------------------------------------------------------------------
 
---// Utility Functions
+--// Library Unit Tests
 
-test("get_table_parts", function()
+test("library::get_table_parts", function()
     local a_parts = byteparse.get_table_parts({1, 1, 1, 1, 1});
 
     assert(a_parts.array, `'a_parts' should have an array`);
@@ -62,7 +108,7 @@ test("get_table_parts", function()
     assert(c_parts.hash_size == 2, `'c_parts.hash_size' should be 2`);
 end);
 
-test("trim_zbuffer", function()
+test("library::trim_zbuffer", function()
     local a = byteparse.trim_zbuffer(buffer.fromstring("helloworld\0ahhh!!!"));
     assert(buffer.tostring(a) == "helloworld", "a should equal 'helloworld'");
 
@@ -70,7 +116,7 @@ test("trim_zbuffer", function()
     assert(buffer.tostring(b) == "helloworld", "b should equal 'helloworld'");
 end);
 
-test("trim_zstring", function()
+test("library::trim_zstring", function()
     local a = byteparse.trim_zstring("helloworld\0ahhh!!!");
     assert(a == "helloworld", "a should equal 'helloworld'");
 
@@ -78,23 +124,31 @@ test("trim_zstring", function()
     assert(b == "helloworld", "b should equal 'helloworld'");
 end);
 
-test("{writer,reader}::new", function()
+test("library::zterm_string", function()
+    assert(byteparse.zterm_string("a"), "a\0");
+end);
+
+test("library::zterm_buffer", function()
+    assert_buffer_eq(byteparse.zterm_buffer(buffer_from("FF")), "FF00");
+end);
+
+test("library::{writer,reader}::new", function()
     byteparse.reader(byteparse.writer(1000).to_buffer());
 end);
 
-test("writer::{set,get}_capacity", function()
+test("library::writer::{set,get}_capacity", function()
     local writer = byteparse.writer(0);
     writer.set_capacity(10);
     assert(writer.get_capacity() == 10, "capacity should've been set to 10");
 end);
 
-test("writer::expand", function()
+test("library::writer::expand", function()
     local writer = byteparse.writer(0);
     writer.expand(10);
     assert(writer.get_capacity() ~= 10, "capacity should've been increased");
 end);
 
-test("{writer,reader}::{set,get}_cursor", function()
+test("library::{writer,reader}::{set,get}_cursor", function()
     local writer = byteparse.writer(0);
     writer.set_cursor(10);
     assert(writer.get_cursor() == 10, "cursor should've been set to 10");
@@ -104,238 +158,335 @@ test("{writer,reader}::{set,get}_cursor", function()
     assert(reader.get_cursor() == 10, "cursor should've been set to 10");
 end);
 
-test("{writer,reader}::set_vector_size", function()
+test("library::{writer,reader}::set_vector_size", function()
     local writer = byteparse.writer(0);
     writer.set_vector_size(4);
     local reader = byteparse.reader(buffer.create(100));
     reader.set_vector_size(4);
 end);
 
-test("writer::to_buffer", function()
+test("library::writer::to_buffer", function()
     local writer = byteparse.writer(1000);
     writer.write_u8(255);
     local buf = writer.to_buffer();
     assert(buffer.readu8(buf, 0) == 255, "first byte should be 255");
 end);
 
-test("writer::to_string", function()
+test("library::writer::to_string", function()
     local writer = byteparse.writer(1000);
     writer.write_string("helloworld");
     assert(writer.to_string() == "helloworld", "string should be 'helloworld'");
 end);
 
-test("{writer,reader}::{write,read}_u8", function()
+test("library::{writer,reader}::{write,read}_u8", function()
     local writer = byteparse.writer(1);
     writer.write_u8(100);
     writer.write_u8(50);
-    local reader = byteparse.reader(writer.to_buffer());
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "64 32");
+
+    local reader = byteparse.reader(buf);
     assert(reader.read_u8() == 100, "first u8 should be 100");
     assert(reader.read_u8() == 50, "second u8 should be 50");
 end);
 
-test("{writer,reader}::{write,read}_u16", function()
+test("library::{writer,reader}::{write,read}_u16", function()
     local writer = byteparse.writer(1);
     writer.write_u16(10000);
     writer.write_u16(5000);
-    local reader = byteparse.reader(writer.to_buffer());
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "1027 8813");
+
+    local reader = byteparse.reader(buf);
     assert(reader.read_u16() == 10000, "first u16 should be 10000");
     assert(reader.read_u16() == 5000, "second u16 should be 5000");
 end);
 
-test("{writer,reader}::{write,read}_u32", function()
+test("library::{writer,reader}::{write,read}_u32", function()
     local writer = byteparse.writer(1);
     writer.write_u32(1000000);
     writer.write_u32(500000);    
-    local reader = byteparse.reader(writer.to_buffer());
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "40420F00 20A10700");
+
+    local reader = byteparse.reader(buf);
     assert(reader.read_u32() == 1000000, "first u32 should be 1000000");
     assert(reader.read_u32() == 500000, "second u32 should be 500000");
 end);
 
-test("{writer,reader}::{write,read}_i8", function()
+test("library::{writer,reader}::{write,read}_i8", function()
     local writer = byteparse.writer(1);
     writer.write_i8(-100);
     writer.write_i8(-50);
-    local reader = byteparse.reader(writer.to_buffer());
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "9C CE");
+
+    local reader = byteparse.reader(buf);
     assert(reader.read_i8() == -100, "first i8 should be -100");
     assert(reader.read_i8() == -50, "second i8 should be -50");
 end);
 
-test("{writer,reader}::{write,read}_i16", function()
+test("library::{writer,reader}::{write,read}_i16", function()
     local writer = byteparse.writer(1);
     writer.write_i16(-10000);
     writer.write_i16(-5000);
-    local reader = byteparse.reader(writer.to_buffer());
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "F0D8 78EC");
+
+    local reader = byteparse.reader(buf);
     assert(reader.read_i16() == -10000, "first i16 should be -10000");
     assert(reader.read_i16() == -5000, "second i16 should be -5000");
 end);
 
-test("{writer,reader}::{write,read}_i32", function()
+test("library::{writer,reader}::{write,read}_i32", function()
     local writer = byteparse.writer(1);
     writer.write_i32(-1000000);
     writer.write_i32(-500000);
-    local reader = byteparse.reader(writer.to_buffer());
+    
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "C0BDF0FF E05EF8FF");
+
+    local reader = byteparse.reader(buf);
     assert(reader.read_i32() == -1000000, "first i32 should be -1000000");
     assert(reader.read_i32() == -500000, "second i32 should be -500000");
 end);
 
-test("{writer,reader}::{write,read}_f32", function()
+test("library::{writer,reader}::{write,read}_f32", function()
     local writer = byteparse.writer(1);
     writer.write_f32(12);
     writer.write_f32(-11);
-    local reader = byteparse.reader(writer.to_buffer());
+        
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "00004041 000030C1");
+
+    local reader = byteparse.reader(buf);
     assert(reader.read_f32() == 12, "first f32 should be 12");
     assert(reader.read_f32() == -11, "second f32 should be -11");
 end);
 
-test("{writer,reader}::{write,read}_f64", function()
+test("library::{writer,reader}::{write,read}_f64", function()
     local writer = byteparse.writer(1);
     writer.write_f64(12);
     writer.write_f64(-11);
-    local reader = byteparse.reader(writer.to_buffer());
+        
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "0000000000002840 00000000000026C0");
+
+    local reader = byteparse.reader(buf);
     assert(reader.read_f64() == 12, "first f64 should be 12");
     assert(reader.read_f64() == -11, "second f64 should be -11");
 end);
 
-test("{writer,reader}::{write,read}_varint", function()
+test("library::{writer,reader}::{write,read}_varint", function()
     local writer = byteparse.writer(1);
-    writer.write_varint(1583252);
-    writer.write_varint(235266);
-    local reader = byteparse.reader(writer.to_buffer());
-    assert(reader.read_varint() == 1583252, "first varint should be 1583252");
-    assert(reader.read_varint() == 235266, "second varint should be 235266");
+    writer.write_varint(150);
+    writer.write_varint(1);
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "9601 01");
+
+    local reader = byteparse.reader(buf);
+    assert(reader.read_varint() == 150, "first varint should be 1583252");
+    assert(reader.read_varint() == 1, "second varint should be 235266");
 end);
 
-test("{writer,reader}::{write,read}_bool", function()
+test("library::{writer,reader}::{write,read}_bool", function()
     local writer = byteparse.writer(1);
     writer.write_bool(false);
     writer.write_bool(true);
-    local reader = byteparse.reader(writer.to_buffer());
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "00 01");
+
+    local reader = byteparse.reader(buf);
     assert(reader.read_bool() == false, "first bool should be false");
     assert(reader.read_bool() == true, "second bool should be true");
 end);
 
-test("writer::write_null", function()
+test("library::writer::write_null", function()
     local writer = byteparse.writer(1);
     writer.write_null();
     writer.write_null();
+
     local buf = writer.to_buffer();
-    assert(buffer.readu8(buf, 0) == 0, "first byte should be 0");
-    assert(buffer.readu8(buf, 1) == 0, "second byte should be 0");
+    assert_buffer_eq(buf, "00 00");
 end);
 
-test("{writer,reader}::{write,read}_string", function()
+test("library::{writer,reader}::{write,read}_string", function()
     local writer = byteparse.writer(1);
     writer.write_string("first");
-    writer.write_string("second");
-    local reader = byteparse.reader(writer.to_buffer());
+    writer.write_string("second", 10);
+    writer.write_string("third", 4);
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, `6669727374 7365636f6e6400000000 74686972`);
+
+    local reader = byteparse.reader(buf);
     assert(reader.read_string(5) == "first", "first string should be 'first''");
-    assert(reader.read_string(6) == "second", "second string should be 'second'");
+    assert(reader.read_string(10) == "second\0\0\0\0", "second string should be 'second\\0\\0\\0\\0'");
+    assert(reader.read_string(4) == "thir", "third string should be 'thir'");
 end);
 
-test("{writer,reader}::{write,read}_lstring", function()
+test("library::{writer,reader}::{write,read}_lstring", function()
     local writer = byteparse.writer(1);
     writer.write_lstring("first");
-    writer.write_lstring("second");
-    local reader = byteparse.reader(writer.to_buffer());
+    writer.write_lstring("second", 10);
+    writer.write_lstring("third", 4);
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, `056669727374 0A7365636f6e6400000000 0474686972`);
+
+    local reader = byteparse.reader(buf);
     assert(reader.read_lstring() == "first", "first string should be 'first''");
-    assert(reader.read_lstring() == "second", "second string should be 'second'");
+    assert(reader.read_lstring() == "second\0\0\0\0", "second string should be 'second\\0\\0\\0\\0'");
+    assert(reader.read_lstring() == "thir", "third string should be 'thir'");
+
 end);
 
-test("{writer,reader}::{write,read}_zstring", function()
+test("library::{writer,reader}::{write,read}_zstring", function()
     local writer = byteparse.writer(1);
-    writer.write_zstring("first");
-    writer.write_zstring("second");
-    local reader = byteparse.reader(writer.to_buffer());
+    writer.write_zstring("first"); -- Should be followed by one null byte
+    writer.write_zstring("second", 10); -- Rest of the buffer should be filled with nulls
+    writer.write_zstring("third", 4); -- Last byte should be trimmed and replaced with null
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, `666972737400 7365636f6e6400000000 74686900`);
+
+    local reader = byteparse.reader(buf);
     assert(reader.read_zstring() == "first", "first string should be 'first''");
-    assert(reader.read_zstring() == "second", "second string should be 'second'");
+    assert(reader.read_zstring(10) == "second", "second string should be 'second'");
+    assert(reader.read_zstring(4) == "thi", "third string should be 'thi'");
 end);
 
-test("{writer,reader}::{write,read}_buffer", function()
+test("library::{writer,reader}::{write,read}_buffer", function()
     local writer = byteparse.writer(1);
-    writer.write_buffer(buffer.fromstring("first"));
-    writer.write_buffer(buffer.fromstring("second"));
+    writer.write_buffer(buffer_from("00010203"));
+    writer.write_buffer(buffer_from("04050607"));
+    
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "00010203 04050607")
+    
     local reader = byteparse.reader(writer.to_buffer());
-    assert(buffer.tostring(reader.read_buffer(5)) == "first", "first buffer should be 'first''");
-    assert(buffer.tostring(reader.read_buffer(6)) == "second", "second buffer should be 'second'");
+    assert_buffer_eq(reader.read_buffer(4), "00010203");
+    assert_buffer_eq(reader.read_buffer(4), "04050607");
 end);
 
-test("{writer,reader}::{write,read}_lbuffer", function()
+test("library::{writer,reader}::{write,read}_lbuffer", function()
     local writer = byteparse.writer(1);
-    writer.write_lbuffer(buffer.fromstring("first"));
-    writer.write_lbuffer(buffer.fromstring("second"));
+    writer.write_lbuffer(buffer_from("1A2A3A4A"));
+    writer.write_lbuffer(buffer_from("1A2A"));
+    
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "041A2A3A4A 021A2A")
+    
     local reader = byteparse.reader(writer.to_buffer());
-    assert(buffer.tostring(reader.read_lbuffer()) == "first", "first buffer should be 'first''");
-    assert(buffer.tostring(reader.read_lbuffer()) == "second", "second buffer should be 'second'");
+    assert_buffer_eq(reader.read_lbuffer(), "1A2A3A4A");
+    assert_buffer_eq(reader.read_lbuffer(), "1A2A");
 end);
 
-test("{writer,reader}::{write,read}_zbuffer", function()
+test("library::{writer,reader}::{write,read}_zbuffer", function()
     local writer = byteparse.writer(1);
-    writer.write_zbuffer(buffer.fromstring("first"));
-    writer.write_zbuffer(buffer.fromstring("second"));
+    writer.write_zbuffer(buffer_from("1A2A3A4A"));
+    writer.write_zbuffer(buffer_from("1A2A"));
+    
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "1A2A3A4A00 1A2A00")
+    
     local reader = byteparse.reader(writer.to_buffer());
-    assert(buffer.tostring(reader.read_zbuffer()) == "first", "first buffer should be 'first''");
-    assert(buffer.tostring(reader.read_zbuffer()) == "second", "second buffer should be 'second'");
+    assert_buffer_eq(reader.read_zbuffer(), "1A2A3A4A");
+    assert_buffer_eq(reader.read_zbuffer(), "1A2A");
 end);
 
-test("{writer,reader}::{write,read}_array", function()
+test("library::{writer,reader}::{write,read}_array", function()
     local array_1 = table.create(10, 5);
-    local array_2 = table.create(10, 9);
+    local array_2 = table.create(5, 9);
+    
     local writer = byteparse.writer(1);
     writer.write_array(array_1, writer.write_u8);
     writer.write_array(array_2, writer.write_u8);
-    local reader = byteparse.reader(writer.to_buffer());
-    assert(table.concat(reader.read_array(10, reader.read_u8)) == table.concat(array_1), "first array should be equal to array_1");
-    assert(table.concat(reader.read_array(10, reader.read_u8)) == table.concat(array_2), "second array should be equal to array_2");
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "05050505050505050505 0909090909")
+
+    local reader = byteparse.reader(buf);
+    assert_tbl_eq(reader.read_array(10, reader.read_u8), array_1);
+    assert_tbl_eq(reader.read_array(5, reader.read_u8), array_2);
 end);
 
-test("{writer,reader}::{write,read}_larray", function()
+test("library::{writer,reader}::{write,read}_larray", function()
     local array_1 = table.create(10, 5);
-    local array_2 = table.create(10, 9);
+    local array_2 = table.create(5, 9);
+    
     local writer = byteparse.writer(1);
     writer.write_larray(array_1, writer.write_u8);
     writer.write_larray(array_2, writer.write_u8);
-    local reader = byteparse.reader(writer.to_buffer());
-    assert(table.concat(reader.read_larray(reader.read_u8)) == table.concat(array_1), "first array should be equal to array_1");
-    assert(table.concat(reader.read_larray(reader.read_u8)) == table.concat(array_2), "second array should be equal to array_2");
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "0A05050505050505050505 050909090909")
+
+    local reader = byteparse.reader(buf);
+    assert_tbl_eq(reader.read_larray(reader.read_u8), array_1);
+    assert_tbl_eq(reader.read_larray(reader.read_u8), array_2);
 end);
 
-test("{writer,reader}::{write,read}_zarray", function()
+test("library::{writer,reader}::{write,read}_zarray", function()
     local array_1 = table.create(10, 5);
-    local array_2 = table.create(10, 9);
+    local array_2 = table.create(5, 9);
+    
     local writer = byteparse.writer(1);
     writer.write_zarray(array_1, writer.write_u8);
     writer.write_zarray(array_2, writer.write_u8);
-    local reader = byteparse.reader(writer.to_buffer());
-    assert(table.concat(reader.read_zarray(reader.read_u8)) == table.concat(array_1), "first array should be equal to array_1");
-    assert(table.concat(reader.read_zarray(reader.read_u8)) == table.concat(array_2), "second array should be equal to array_2");
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "0505050505050505050500 090909090900")
+
+    local reader = byteparse.reader(buf);
+    assert_tbl_eq(reader.read_zarray(reader.read_u8), array_1);
+    assert_tbl_eq(reader.read_zarray(reader.read_u8), array_2);
 end);
 
-test("{writer,reader}::{write,read}_vector", function()
+test("library::{writer,reader}::{write,read}_vector", function()
     local vector_1 = vector.create(1, 2, 3);
     local vector_2 = vector.create(3, 2, 1);
+
     local writer = byteparse.writer(1);
+    writer.set_vector_size(3);
     writer.write_vector(vector_1);
     writer.write_vector(vector_2);
-    local reader = byteparse.reader(writer.to_buffer());
+    
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "0000803F 00000040 00004040  00004040 00000040 0000803F")
+    
+    local reader = byteparse.reader(buf);
     assert(reader.read_vector() == vector_1, "first vector should equal vector_2");
     assert(reader.read_vector() == vector_2, "first vector should equal vector_1");
 end);
 
-test("{writer,reader}::{write,read}_table", function()
-    local table_1 = {1, 2, 3};
-    local table_2 = {a = 1, b = 2, c = 3};
-    local table_3 = {1, 2, 3, a = 1, b = 2, c = 3};
+test("library::{writer,reader}::{write,read}_table", function()
+    local table_1 = {1, 2};
+    local table_2 = {a = 1, b = 2};
+    local table_3 = {1, 2, a = 1, b = 2};
+
     local writer = byteparse.writer(0);
     writer.write_table(table_1);
     writer.write_table(table_2);
     writer.write_table(table_3);
-    local reader = byteparse.reader(writer.to_buffer());
-    assert(tbl_eq(reader.read_table(), table_1), "first table should equal table_1");
-    assert(tbl_eq(reader.read_table(), table_2), "second table should equal table_2");
-    assert(tbl_eq(reader.read_table(), table_3), "third table should equal table_3");
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "{01 {02 02000000000000F03F 020000000000000040}} {02 {02 040161 02000000000000F03F 040162 020000000000000040}} {03 {02 02000000000000F03F 020000000000000040} {02 040161 02000000000000F03F 040162 020000000000000040}}");
+
+    local reader = byteparse.reader(buf);
+    assert_tbl_eq(reader.read_table(), table_1);
+    assert_tbl_eq(reader.read_table(), table_2);
+    assert_tbl_eq(reader.read_table(), table_3);
 end);
 
-test("{writer,reader}::{write,read}_any", function()
+test("library::{writer,reader}::{write,read}_any", function()
     local writer = byteparse.writer(0);
     writer.write_any(nil);
     writer.write_any(true);
@@ -343,16 +494,19 @@ test("{writer,reader}::{write,read}_any", function()
     writer.write_any(vector.create(1, 2, 3));
     writer.write_any("ahhh!!!");
     writer.write_any(buffer.fromstring("helloworld"));
-    writer.write_any({a = 1, b = 1, c = 1});
+    writer.write_any({1});
 
-    local reader = byteparse.reader(writer.to_buffer());
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "00 0101 020000000000005940 030000803F0000004000004040 040761686868212121 050A68656C6C6F776F726C64 06010102000000000000F03F");
+
+    local reader = byteparse.reader(buf);
     assert(reader.read_any() == nil);
     assert(reader.read_any() == true);
     assert(reader.read_any() == 100);
-    assert(tbl_eq(reader.read_any(), vector.create(1, 2, 3)));
+    assert(assert_tbl_eq(reader.read_any(), vector.create(1, 2, 3)));
     assert(reader.read_any() == "ahhh!!!");
     assert(buffer.tostring(reader.read_any() :: any) == "helloworld");
-    assert(tbl_eq(reader.read_any(), {a = 1, b = 1, c = 1}));
+    assert_tbl_eq(reader.read_any(), {1});
 end);
 
 --------------------------------------------------------------------------------

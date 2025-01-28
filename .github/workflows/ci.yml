@@ -5,10 +5,12 @@ on:
 
 jobs:
     test:
-        name: test
+        name: Test & Bench
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
             - uses: CompeyDev/setup-rokit@v0.1.2
             - name: Test
               run: lune run scripts/test
+            - name: Benchmark
+              run: lune run scripts/bench
