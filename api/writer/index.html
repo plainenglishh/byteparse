@@ -6,83 +6,81 @@
 <title data-rh="true">writer • Byteparse</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://plainenglishh.github.io/byteparse/api/writer"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="writer • Byteparse"><meta data-rh="true" name="description" content="Writer instance used to serialise to binary formats.
     "><meta data-rh="true" property="og:description" content="Writer instance used to serialise to binary formats.
     "><link data-rh="true" rel="canonical" href="https://plainenglishh.github.io/byteparse/api/writer"><link data-rh="true" rel="alternate" href="https://plainenglishh.github.io/byteparse/api/writer" hreflang="en"><link data-rh="true" rel="alternate" href="https://plainenglishh.github.io/byteparse/api/writer" hreflang="x-default"><link rel="stylesheet" href="/byteparse/assets/css/styles.f5b42892.css">
-<script src="/byteparse/assets/js/runtime~main.d2cb43b5.js" defer="defer"></script>
-<script src="/byteparse/assets/js/main.616bdd42.js" defer="defer"></script>
+<script src="/byteparse/assets/js/runtime~main.1b76e3ea.js" defer="defer"></script>
+<script src="/byteparse/assets/js/main.2e6ae17d.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/byteparse/"><b class="navbar__title text--truncate">Byteparse</b></a><a class="navbar__item navbar__link" href="/byteparse/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/byteparse/api/">API</a><a class="navbar__item navbar__link" href="/byteparse/changelog">Changelog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/plainenglishh/byteparse/releases" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Releases<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/plainenglishh/byteparse" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0 docPageContainer_wNNk"><div class="docPage_Dpn1"><div class="docSidebarContainer_o_re"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/byteparse/api/byteparse">byteparse</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/byteparse/api/reader">reader</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/byteparse/api/writer">writer</a></li></ul></nav></div></div><main class="docMainContainer_HJE1"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_MU3C"><div class="docItemContainer_Wv98"><article><div class="member_J0w1 markdown"><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_oUs_"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><header><h1 class="docTitle_mZRt" style="text-decoration:none"><span style="display:inline-block">writer</span></h1><div class="luaClassTags_EipM"></div><div>
 <p>Writer instance used to serialise to binary formats.</p>
-</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="set_capacity"><code style="text-decoration:none">set_capacity</code><a href="#set_capacity" class="hash-link" aria-label="Direct link to set_capacity" title="Direct link to set_capacity">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L225"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">set_capacity</code><code>(</code><code>new_size<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="set_capacity"><code style="text-decoration:none">set_capacity</code><a href="#set_capacity" class="hash-link" aria-label="Direct link to set_capacity" title="Direct link to set_capacity">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L274"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">set_capacity</code><code>(</code><code>new_size<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Resizes the internal buffer to a given size.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="expand"><code style="text-decoration:none">expand</code><a href="#expand" class="hash-link" aria-label="Direct link to expand" title="Direct link to expand">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L239"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">expand</code><code>(</code><code>extra_size<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="expand"><code style="text-decoration:none">expand</code><a href="#expand" class="hash-link" aria-label="Direct link to expand" title="Direct link to expand">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L288"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">expand</code><code>(</code><code>extra_size<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>
   Ensures the internal buffer can handle <code>extra_size</code> more data by
   expanding the capacity if necessary.
 </p>
 <p>Resizes relative to the cursor.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="set_cursor"><code style="text-decoration:none">set_cursor</code><a href="#set_cursor" class="hash-link" aria-label="Direct link to set_cursor" title="Direct link to set_cursor">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L266"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">set_cursor</code><code>(</code><code>position<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="set_cursor"><code style="text-decoration:none">set_cursor</code><a href="#set_cursor" class="hash-link" aria-label="Direct link to set_cursor" title="Direct link to set_cursor">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L315"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">set_cursor</code><code>(</code><code>position<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Sets the write cursor to a given position.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="get_cursor"><code style="text-decoration:none">get_cursor</code><a href="#get_cursor" class="hash-link" aria-label="Direct link to get_cursor" title="Direct link to get_cursor">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L275"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">get_cursor</code><code>(</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="get_cursor"><code style="text-decoration:none">get_cursor</code><a href="#get_cursor" class="hash-link" aria-label="Direct link to get_cursor" title="Direct link to get_cursor">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L324"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">get_cursor</code><code>(</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
 <p>Returns the current cursor position.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="get_size"><code style="text-decoration:none">get_size</code><a href="#get_size" class="hash-link" aria-label="Direct link to get_size" title="Direct link to get_size">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L284"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">get_size</code><code>(</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="get_size"><code style="text-decoration:none">get_size</code><a href="#get_size" class="hash-link" aria-label="Direct link to get_size" title="Direct link to get_size">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L333"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">get_size</code><code>(</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
 <p>Returns the current written size.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="get_capacity"><code style="text-decoration:none">get_capacity</code><a href="#get_capacity" class="hash-link" aria-label="Direct link to get_capacity" title="Direct link to get_capacity">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L293"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">get_capacity</code><code>(</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="get_capacity"><code style="text-decoration:none">get_capacity</code><a href="#get_capacity" class="hash-link" aria-label="Direct link to get_capacity" title="Direct link to get_capacity">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L342"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">get_capacity</code><code>(</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
 <p>Returns the internal buffer capacity.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="set_vector_size"><code style="text-decoration:none">set_vector_size</code><a href="#set_vector_size" class="hash-link" aria-label="Direct link to set_vector_size" title="Direct link to set_vector_size">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L310"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">set_vector_size</code><code>(</code><div class="inset_uKQm"><div><code>vec_size<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
-<p>The vector size, must be either 3 or 4.</p>
-</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="set_default_vector_size"><code style="text-decoration:none">set_default_vector_size</code><a href="#set_default_vector_size" class="hash-link" aria-label="Direct link to set_default_vector_size" title="Direct link to set_default_vector_size">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L359"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">set_default_vector_size</code><code>(</code><code>vec_size<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>
   Sets the vector size. The given vector size cannot exceed the VMs
   'LUA_VECTOR_SIZE' size.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="to_buffer"><code style="text-decoration:none">to_buffer</code><a href="#to_buffer" class="hash-link" aria-label="Direct link to to_buffer" title="Direct link to to_buffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L321"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">to_buffer</code><code>(</code><code>) → </code><code class="blue_P4bS">buffer</code></div><div>
+</div><h3>Errors</h3><table class="errorTable_jfN8"><thead><tr><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>InvalidVecSize</td><td>Errors when passed a vector size that isn&#x27;t 3 or 4.</td></tr></tbody></table><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="to_buffer"><code style="text-decoration:none">to_buffer</code><a href="#to_buffer" class="hash-link" aria-label="Direct link to to_buffer" title="Direct link to to_buffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L370"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">to_buffer</code><code>(</code><code>) → </code><code class="blue_P4bS">buffer</code></div><div>
 <p>Returns a buffer containing the written data.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="to_string"><code style="text-decoration:none">to_string</code><a href="#to_string" class="hash-link" aria-label="Direct link to to_string" title="Direct link to to_string">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L330"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">to_string</code><code>(</code><code>) → </code><code class="blue_P4bS">string</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="to_string"><code style="text-decoration:none">to_string</code><a href="#to_string" class="hash-link" aria-label="Direct link to to_string" title="Direct link to to_string">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L379"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">to_string</code><code>(</code><code>) → </code><code class="blue_P4bS">string</code></div><div>
 <p>Returns a string containing the written data.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_u8"><code style="text-decoration:none">write_u8</code><a href="#write_u8" class="hash-link" aria-label="Direct link to write_u8" title="Direct link to write_u8">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L338"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_u8</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">u8</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_u8"><code style="text-decoration:none">write_u8</code><a href="#write_u8" class="hash-link" aria-label="Direct link to write_u8" title="Direct link to write_u8">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L387"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_u8</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">u8</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>
   Writes an unsigned 8 bit integer. Wraps around if provided a number
   larger than 8 bits.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_u16"><code style="text-decoration:none">write_u16</code><a href="#write_u16" class="hash-link" aria-label="Direct link to write_u16" title="Direct link to write_u16">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L348"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_u16</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">u16</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_u16"><code style="text-decoration:none">write_u16</code><a href="#write_u16" class="hash-link" aria-label="Direct link to write_u16" title="Direct link to write_u16">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L397"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_u16</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">u16</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>
   Writes an unsigned 16 bit integer. Wraps around if provided a number
   larger than 16 bits.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_u32"><code style="text-decoration:none">write_u32</code><a href="#write_u32" class="hash-link" aria-label="Direct link to write_u32" title="Direct link to write_u32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L358"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_u32</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">u32</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_u32"><code style="text-decoration:none">write_u32</code><a href="#write_u32" class="hash-link" aria-label="Direct link to write_u32" title="Direct link to write_u32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L407"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_u32</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">u32</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>
   Writes an unsigned 32 bit integer. Wraps around if provided a number
   larger than 32 bits.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_i8"><code style="text-decoration:none">write_i8</code><a href="#write_i8" class="hash-link" aria-label="Direct link to write_i8" title="Direct link to write_i8">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L368"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_i8</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">i8</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_i8"><code style="text-decoration:none">write_i8</code><a href="#write_i8" class="hash-link" aria-label="Direct link to write_i8" title="Direct link to write_i8">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L417"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_i8</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">i8</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>
   Writes an unsigned 8 bit integer. Wraps around if provided a number
   larger than 8 bits.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_i16"><code style="text-decoration:none">write_i16</code><a href="#write_i16" class="hash-link" aria-label="Direct link to write_i16" title="Direct link to write_i16">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L378"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_i16</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">i16</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_i16"><code style="text-decoration:none">write_i16</code><a href="#write_i16" class="hash-link" aria-label="Direct link to write_i16" title="Direct link to write_i16">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L427"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_i16</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">i16</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>
   Writes an unsigned 16 bit integer. Wraps around if provided a number
   larger than 16 bits.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_i32"><code style="text-decoration:none">write_i32</code><a href="#write_i32" class="hash-link" aria-label="Direct link to write_i32" title="Direct link to write_i32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L388"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_i32</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">i32</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_i32"><code style="text-decoration:none">write_i32</code><a href="#write_i32" class="hash-link" aria-label="Direct link to write_i32" title="Direct link to write_i32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L437"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_i32</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">i32</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>
   Writes an unsigned 32 bit integer. Wraps around if provided a number
   larger than 32 bits.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_f32"><code style="text-decoration:none">write_f32</code><a href="#write_f32" class="hash-link" aria-label="Direct link to write_f32" title="Direct link to write_f32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L398"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_f32</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">f32</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_f32"><code style="text-decoration:none">write_f32</code><a href="#write_f32" class="hash-link" aria-label="Direct link to write_f32" title="Direct link to write_f32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L447"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_f32</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">f32</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>
   Writes a 32 bit floating point number. Wraps around if provided a number
   larger than 32 bits.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_f64"><code style="text-decoration:none">write_f64</code><a href="#write_f64" class="hash-link" aria-label="Direct link to write_f64" title="Direct link to write_f64">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L407"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_f64</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">f64</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_f64"><code style="text-decoration:none">write_f64</code><a href="#write_f64" class="hash-link" aria-label="Direct link to write_f64" title="Direct link to write_f64">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L456"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_f64</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">f64</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes a 64 bit floating point number.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_varint"><code style="text-decoration:none">write_varint</code><a href="#write_varint" class="hash-link" aria-label="Direct link to write_varint" title="Direct link to write_varint">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L416"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_varint</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">varint</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_varint"><code style="text-decoration:none">write_varint</code><a href="#write_varint" class="hash-link" aria-label="Direct link to write_varint" title="Direct link to write_varint">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L465"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_varint</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">varint</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes a ProtoBuf <a href="https://protobuf.dev/programming-guides/encoding/#varints">Base 128 Variable-width integer</a>.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_bool"><code style="text-decoration:none">write_bool</code><a href="#write_bool" class="hash-link" aria-label="Direct link to write_bool" title="Direct link to write_bool">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L430"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_bool</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">boolean</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_bool"><code style="text-decoration:none">write_bool</code><a href="#write_bool" class="hash-link" aria-label="Direct link to write_bool" title="Direct link to write_bool">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L479"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_bool</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">boolean</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes a boolean.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_null"><code style="text-decoration:none">write_null</code><a href="#write_null" class="hash-link" aria-label="Direct link to write_null" title="Direct link to write_null">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L437"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_null</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_null"><code style="text-decoration:none">write_null</code><a href="#write_null" class="hash-link" aria-label="Direct link to write_null" title="Direct link to write_null">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L486"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_null</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes a null byte.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_string"><code style="text-decoration:none">write_string</code><a href="#write_string" class="hash-link" aria-label="Direct link to write_string" title="Direct link to write_string">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L449"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_string</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_string"><code style="text-decoration:none">write_string</code><a href="#write_string" class="hash-link" aria-label="Direct link to write_string" title="Direct link to write_string">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L498"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_string</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>
   Writes a string without a prefixed length, optionally trimmed/padded to
   a given size.
@@ -92,9 +90,9 @@
   strings size, as this function writes the string raw and doesn't write
   any data a reader can use to determine the size.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_lstring"><code style="text-decoration:none">write_lstring</code><a href="#write_lstring" class="hash-link" aria-label="Direct link to write_lstring" title="Direct link to write_lstring">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L466"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_lstring</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_lstring"><code style="text-decoration:none">write_lstring</code><a href="#write_lstring" class="hash-link" aria-label="Direct link to write_lstring" title="Direct link to write_lstring">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L515"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_lstring</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes a length prefixed string.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_zstring"><code style="text-decoration:none">write_zstring</code><a href="#write_zstring" class="hash-link" aria-label="Direct link to write_zstring" title="Direct link to write_zstring">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L487"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_zstring</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_zstring"><code style="text-decoration:none">write_zstring</code><a href="#write_zstring" class="hash-link" aria-label="Direct link to write_zstring" title="Direct link to write_zstring">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L536"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_zstring</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes a null terminated (C Style) string.</p>
 <p>
   When passed <code>size</code>, trims the string to <code>size</code> or pads the end with zeros.
@@ -125,7 +123,7 @@
     
   
 
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_buffer"><code style="text-decoration:none">write_buffer</code><a href="#write_buffer" class="hash-link" aria-label="Direct link to write_buffer" title="Direct link to write_buffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L503"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_buffer</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">buffer</code><code>,</code></div><div><code>offset<!-- -->: </code><code class="blue_P4bS">number?</code><code>,</code></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_buffer"><code style="text-decoration:none">write_buffer</code><a href="#write_buffer" class="hash-link" aria-label="Direct link to write_buffer" title="Direct link to write_buffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L552"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_buffer</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">buffer</code><code>,</code></div><div><code>offset<!-- -->: </code><code class="blue_P4bS">number?</code><code>,</code></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>
   Writes a buffer without a prefixed length, optionally trimmed or null
   padded to to a specified size.
@@ -135,9 +133,9 @@
   buffers size, as this function writes the buffer raw and doesn't write
   any data a reader can use to determine the size.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_lbuffer"><code style="text-decoration:none">write_lbuffer</code><a href="#write_lbuffer" class="hash-link" aria-label="Direct link to write_lbuffer" title="Direct link to write_lbuffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L521"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_lbuffer</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">buffer</code><code>,</code></div><div><code>offset<!-- -->: </code><code class="blue_P4bS">number?</code><code>,</code></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_lbuffer"><code style="text-decoration:none">write_lbuffer</code><a href="#write_lbuffer" class="hash-link" aria-label="Direct link to write_lbuffer" title="Direct link to write_lbuffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L570"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_lbuffer</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">buffer</code><code>,</code></div><div><code>offset<!-- -->: </code><code class="blue_P4bS">number?</code><code>,</code></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes a length prefixed buffer.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_zbuffer"><code style="text-decoration:none">write_zbuffer</code><a href="#write_zbuffer" class="hash-link" aria-label="Direct link to write_zbuffer" title="Direct link to write_zbuffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L540"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_zbuffer</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">buffer</code><code>,</code></div><div><code>offset<!-- -->: </code><code class="blue_P4bS">number?</code><code>,</code></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_zbuffer"><code style="text-decoration:none">write_zbuffer</code><a href="#write_zbuffer" class="hash-link" aria-label="Direct link to write_zbuffer" title="Direct link to write_zbuffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L589"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_zbuffer</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">buffer</code><code>,</code></div><div><code>offset<!-- -->: </code><code class="blue_P4bS">number?</code><code>,</code></div><div><code>size<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes a null terminated (C Style) buffer.</p>
 <p>Assumes the buffer is null safe.</p>
 
@@ -164,35 +162,45 @@
     
   
 
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_array"><code style="text-decoration:none">write_array</code><a href="#write_array" class="hash-link" aria-label="Direct link to write_array" title="Direct link to write_array">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L555"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_array</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">T</code><code class="purple_ieR2">}</code><code>,</code></div><div><code>encoder<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">T</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
-<p>Additional parameters to pass to the encoder.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_array"><code style="text-decoration:none">write_array</code><a href="#write_array" class="hash-link" aria-label="Direct link to write_array" title="Direct link to write_array">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L604"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_array</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">T</code><code class="purple_ieR2">}</code><code>,</code></div><div><code>writer_callback<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">T</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
+<p>Additional parameters to pass to the writer_callback.</p>
 </span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes a array without a prefixed length.</p>
-<p>Assumes the encoder function advances the cursor.</p>
+<p>Assumes the writer_callback function advances the cursor.</p>
 <p>
   Note: You should ensure the binary format has a way of encoding the
   arrays size, as this function doesn't write any data a reader can use
   to determine the size.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_larray"><code style="text-decoration:none">write_larray</code><a href="#write_larray" class="hash-link" aria-label="Direct link to write_larray" title="Direct link to write_larray">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L568"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_larray</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">T</code><code class="purple_ieR2">}</code><code>,</code></div><div><code>encoder<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">T</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
-<p>Additional parameters to pass to the encoder.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_larray"><code style="text-decoration:none">write_larray</code><a href="#write_larray" class="hash-link" aria-label="Direct link to write_larray" title="Direct link to write_larray">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L617"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_larray</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">T</code><code class="purple_ieR2">}</code><code>,</code></div><div><code>writer_callback<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">T</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
+<p>Additional parameters to pass to the writer_callback.</p>
 </span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes a length prefixed array.</p>
-<p>Assumes the encoder function advances the cursor.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_zarray"><code style="text-decoration:none">write_zarray</code><a href="#write_zarray" class="hash-link" aria-label="Direct link to write_zarray" title="Direct link to write_zarray">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L581"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_zarray</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">T</code><code class="purple_ieR2">}</code><code>,</code></div><div><code>encoder<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">T</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
-<p>Additional parameters to pass to the encoder.</p>
+<p>Assumes the writer_callback function advances the cursor.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_zarray"><code style="text-decoration:none">write_zarray</code><a href="#write_zarray" class="hash-link" aria-label="Direct link to write_zarray" title="Direct link to write_zarray">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L630"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_zarray</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="purple_ieR2">{</code><code class="blue_P4bS">T</code><code class="purple_ieR2">}</code><code>,</code></div><div><code>writer_callback<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">T</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
+<p>Additional parameters to pass to the writer_callback.</p>
 </span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes a null terminated array.</p>
 <p>
-  Assumes the encoder function advances the cursor. The encoder function
+  Assumes the writer_callback function advances the cursor. The writer_callback function
   can freely emit null bytes <strong>after</strong> the first byte, provided it advances the cursor properly.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_vector"><code style="text-decoration:none">write_vector</code><a href="#write_vector" class="hash-link" aria-label="Direct link to write_vector" title="Direct link to write_vector">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L589"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_vector</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">vector</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_vector"><code style="text-decoration:none">write_vector</code><a href="#write_vector" class="hash-link" aria-label="Direct link to write_vector" title="Direct link to write_vector">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L638"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_vector</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">vector</code><code>,</code></div><div><code>vector_size<!-- -->: </code><code class="blue_P4bS">number?</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes a vector.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_table"><code style="text-decoration:none">write_table</code><a href="#write_table" class="hash-link" aria-label="Direct link to write_table" title="Direct link to write_table">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L602"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_table</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">SerialisableTable</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_table"><code style="text-decoration:none">write_table</code><a href="#write_table" class="hash-link" aria-label="Direct link to write_table" title="Direct link to write_table">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L651"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_table</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">SerialisableTable</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes a serialisable table.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_any"><code style="text-decoration:none">write_any</code><a href="#write_any" class="hash-link" aria-label="Direct link to write_any" title="Direct link to write_any">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L634"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_any</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">Serialisable</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_any"><code style="text-decoration:none">write_any</code><a href="#write_any" class="hash-link" aria-label="Direct link to write_any" title="Direct link to write_any">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L683"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_any</code><code>(</code><code>value<!-- -->: </code><code class="blue_P4bS">Serialisable</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Writes any serialisable type, with the Luau TValue prefixed.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="write_optional"><code style="text-decoration:none">write_optional</code><a href="#write_optional" class="hash-link" aria-label="Direct link to write_optional" title="Direct link to write_optional">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L719"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>writer<!-- -->.</code><code class="green_DgR4">write_optional</code><code>(</code><div class="inset_uKQm"><div><code>value<!-- -->: </code><code class="blue_P4bS">T?</code><code>,</code></div><div><code>writer_callback<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">T</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="purple_ieR2">(</code><code class="purple_ieR2">)</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Writes an optional value.</p>
+<p>
+  This function writes a boolean indicating whether the value is present,
+  followed by the data itself (if present) using <code>writer_callback</code>.
+</p>
+<h4>Example Use</h4>
+<pre class="language-lua"><code class="language-lua">writer<span class="token punctuation">.</span><span class="token function">write_optional</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> writer<span class="token punctuation">.</span>write_u8<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">-- Writes `0101`</span>
+writer<span class="token punctuation">.</span><span class="token function">write_optional</span><span class="token punctuation">(</span><span class="token keyword">nil</span><span class="token punctuation">,</span> writer<span class="token punctuation">.</span>write_u8<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">-- Writes `00`</span>
+</code></pre>
 </div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
     &quot;functions&quot;: [
         {
@@ -208,7 +216,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 225,
+                &quot;line&quot;: 274,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -225,7 +233,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 239,
+                &quot;line&quot;: 288,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -243,7 +251,7 @@
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;ignore&quot;: true,
             &quot;source&quot;: {
-                &quot;line&quot;: 253,
+                &quot;line&quot;: 302,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -260,7 +268,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 266,
+                &quot;line&quot;: 315,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -276,7 +284,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 275,
+                &quot;line&quot;: 324,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -292,7 +300,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 284,
+                &quot;line&quot;: 333,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -308,24 +316,30 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 293,
+                &quot;line&quot;: 342,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;set_vector_size&quot;,
+            &quot;name&quot;: &quot;set_default_vector_size&quot;,
             &quot;desc&quot;: &quot;Sets the vector size. The given vector size cannot exceed the VMs\n&#x27;LUA_VECTOR_SIZE&#x27; size.\n\n    &quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;vec_size&quot;,
-                    &quot;desc&quot;: &quot;The vector size, must be either 3 or 4.&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
                     &quot;lua_type&quot;: &quot;number&quot;
                 }
             ],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
+            &quot;errors&quot;: [
+                {
+                    &quot;lua_type&quot;: &quot;InvalidVecSize&quot;,
+                    &quot;desc&quot;: &quot;Errors when passed a vector size that isn&#x27;t 3 or 4.&quot;
+                }
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 310,
+                &quot;line&quot;: 359,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -341,7 +355,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 321,
+                &quot;line&quot;: 370,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -357,7 +371,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 330,
+                &quot;line&quot;: 379,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -374,7 +388,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 338,
+                &quot;line&quot;: 387,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -391,7 +405,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 348,
+                &quot;line&quot;: 397,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -408,7 +422,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 358,
+                &quot;line&quot;: 407,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -425,7 +439,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 368,
+                &quot;line&quot;: 417,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -442,7 +456,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 378,
+                &quot;line&quot;: 427,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -459,7 +473,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 388,
+                &quot;line&quot;: 437,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -476,7 +490,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 398,
+                &quot;line&quot;: 447,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -493,7 +507,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 407,
+                &quot;line&quot;: 456,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -510,7 +524,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 416,
+                &quot;line&quot;: 465,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -527,7 +541,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 430,
+                &quot;line&quot;: 479,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -538,7 +552,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 437,
+                &quot;line&quot;: 486,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -560,7 +574,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 449,
+                &quot;line&quot;: 498,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -582,7 +596,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 466,
+                &quot;line&quot;: 515,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -604,7 +618,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 487,
+                &quot;line&quot;: 536,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -631,7 +645,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 503,
+                &quot;line&quot;: 552,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -658,7 +672,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 521,
+                &quot;line&quot;: 570,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -685,13 +699,13 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 540,
+                &quot;line&quot;: 589,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
         {
             &quot;name&quot;: &quot;write_array&quot;,
-            &quot;desc&quot;: &quot;Writes a array without a prefixed length.\n\nAssumes the encoder function advances the cursor.\n\nNote: You should ensure the binary format has a way of encoding the\narrays size, as this function doesn&#x27;t write any data a reader can use\nto determine the size.\n\n    &quot;,
+            &quot;desc&quot;: &quot;Writes a array without a prefixed length.\n\nAssumes the writer_callback function advances the cursor.\n\nNote: You should ensure the binary format has a way of encoding the\narrays size, as this function doesn&#x27;t write any data a reader can use\nto determine the size.\n\n    &quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;value&quot;,
@@ -699,26 +713,26 @@
                     &quot;lua_type&quot;: &quot;{T}&quot;
                 },
                 {
-                    &quot;name&quot;: &quot;encoder&quot;,
+                    &quot;name&quot;: &quot;writer_callback&quot;,
                     &quot;desc&quot;: &quot;&quot;,
                     &quot;lua_type&quot;: &quot;(T) -&gt; ()&quot;
                 },
                 {
                     &quot;name&quot;: &quot;...&quot;,
-                    &quot;desc&quot;: &quot;Additional parameters to pass to the encoder.&quot;,
+                    &quot;desc&quot;: &quot;Additional parameters to pass to the writer_callback.&quot;,
                     &quot;lua_type&quot;: &quot;B...&quot;
                 }
             ],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 555,
+                &quot;line&quot;: 604,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
         {
             &quot;name&quot;: &quot;write_larray&quot;,
-            &quot;desc&quot;: &quot;Writes a length prefixed array.\n\nAssumes the encoder function advances the cursor.\n\n    &quot;,
+            &quot;desc&quot;: &quot;Writes a length prefixed array.\n\nAssumes the writer_callback function advances the cursor.\n\n    &quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;value&quot;,
@@ -726,26 +740,26 @@
                     &quot;lua_type&quot;: &quot;{T}&quot;
                 },
                 {
-                    &quot;name&quot;: &quot;encoder&quot;,
+                    &quot;name&quot;: &quot;writer_callback&quot;,
                     &quot;desc&quot;: &quot;&quot;,
                     &quot;lua_type&quot;: &quot;(T) -&gt; ()&quot;
                 },
                 {
                     &quot;name&quot;: &quot;...&quot;,
-                    &quot;desc&quot;: &quot;Additional parameters to pass to the encoder.&quot;,
+                    &quot;desc&quot;: &quot;Additional parameters to pass to the writer_callback.&quot;,
                     &quot;lua_type&quot;: &quot;B...&quot;
                 }
             ],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 568,
+                &quot;line&quot;: 617,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
         {
             &quot;name&quot;: &quot;write_zarray&quot;,
-            &quot;desc&quot;: &quot;Writes a null terminated array.\n\nAssumes the encoder function advances the cursor. The encoder function\ncan freely emit null bytes **after** the first byte, provided it advances the cursor properly.\n\n    &quot;,
+            &quot;desc&quot;: &quot;Writes a null terminated array.\n\nAssumes the writer_callback function advances the cursor. The writer_callback function\ncan freely emit null bytes **after** the first byte, provided it advances the cursor properly.\n\n    &quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;value&quot;,
@@ -753,20 +767,20 @@
                     &quot;lua_type&quot;: &quot;{T}&quot;
                 },
                 {
-                    &quot;name&quot;: &quot;encoder&quot;,
+                    &quot;name&quot;: &quot;writer_callback&quot;,
                     &quot;desc&quot;: &quot;&quot;,
                     &quot;lua_type&quot;: &quot;(T) -&gt; ()&quot;
                 },
                 {
                     &quot;name&quot;: &quot;...&quot;,
-                    &quot;desc&quot;: &quot;Additional parameters to pass to the encoder.&quot;,
+                    &quot;desc&quot;: &quot;Additional parameters to pass to the writer_callback.&quot;,
                     &quot;lua_type&quot;: &quot;B...&quot;
                 }
             ],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 581,
+                &quot;line&quot;: 630,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -778,12 +792,17 @@
                     &quot;name&quot;: &quot;value&quot;,
                     &quot;desc&quot;: &quot;&quot;,
                     &quot;lua_type&quot;: &quot;vector&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;vector_size&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
                 }
             ],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 589,
+                &quot;line&quot;: 638,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -800,7 +819,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 602,
+                &quot;line&quot;: 651,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -817,7 +836,34 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 634,
+                &quot;line&quot;: 683,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;write_optional&quot;,
+            &quot;desc&quot;: &quot;Writes an optional value.\n\nThis function writes a boolean indicating whether the value is present,\nfollowed by the data itself (if present) using `writer_callback`.\n\n#### Example Use\n```lua\nwriter.write_optional(1, writer.write_u8); -- Writes `0101`\nwriter.write_optional(nil, writer.write_u8); -- Writes `00`\n```\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;value&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;T?&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;writer_callback&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;(T) -&gt; ()&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;...&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;B...&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 719,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         }
@@ -827,9 +873,9 @@
     &quot;name&quot;: &quot;writer&quot;,
     &quot;desc&quot;: &quot;Writer instance used to serialise to binary formats.\n    &quot;,
     &quot;source&quot;: {
-        &quot;line&quot;: 218,
+        &quot;line&quot;: 267,
         &quot;path&quot;: &quot;lib/init.luau&quot;
     }
-}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#expand" class="table-of-contents__link toc-highlight">.expand</a></li><li><a href="#get_capacity" class="table-of-contents__link toc-highlight">.get_capacity</a></li><li><a href="#get_cursor" class="table-of-contents__link toc-highlight">.get_cursor</a></li><li><a href="#get_size" class="table-of-contents__link toc-highlight">.get_size</a></li><li><a href="#set_capacity" class="table-of-contents__link toc-highlight">.set_capacity</a></li><li><a href="#set_cursor" class="table-of-contents__link toc-highlight">.set_cursor</a></li><li><a href="#set_vector_size" class="table-of-contents__link toc-highlight">.set_vector_size</a></li><li><a href="#to_buffer" class="table-of-contents__link toc-highlight">.to_buffer</a></li><li><a href="#to_string" class="table-of-contents__link toc-highlight">.to_string</a></li><li><a href="#write_any" class="table-of-contents__link toc-highlight">.write_any</a></li><li><a href="#write_array" class="table-of-contents__link toc-highlight">.write_array</a></li><li><a href="#write_bool" class="table-of-contents__link toc-highlight">.write_bool</a></li><li><a href="#write_buffer" class="table-of-contents__link toc-highlight">.write_buffer</a></li><li><a href="#write_f32" class="table-of-contents__link toc-highlight">.write_f32</a></li><li><a href="#write_f64" class="table-of-contents__link toc-highlight">.write_f64</a></li><li><a href="#write_i16" class="table-of-contents__link toc-highlight">.write_i16</a></li><li><a href="#write_i32" class="table-of-contents__link toc-highlight">.write_i32</a></li><li><a href="#write_i8" class="table-of-contents__link toc-highlight">.write_i8</a></li><li><a href="#write_larray" class="table-of-contents__link toc-highlight">.write_larray</a></li><li><a href="#write_lbuffer" class="table-of-contents__link toc-highlight">.write_lbuffer</a></li><li><a href="#write_lstring" class="table-of-contents__link toc-highlight">.write_lstring</a></li><li><a href="#write_null" class="table-of-contents__link toc-highlight">.write_null</a></li><li><a href="#write_string" class="table-of-contents__link toc-highlight">.write_string</a></li><li><a href="#write_table" class="table-of-contents__link toc-highlight">.write_table</a></li><li><a href="#write_u16" class="table-of-contents__link toc-highlight">.write_u16</a></li><li><a href="#write_u32" class="table-of-contents__link toc-highlight">.write_u32</a></li><li><a href="#write_u8" class="table-of-contents__link toc-highlight">.write_u8</a></li><li><a href="#write_varint" class="table-of-contents__link toc-highlight">.write_varint</a></li><li><a href="#write_vector" class="table-of-contents__link toc-highlight">.write_vector</a></li><li><a href="#write_zarray" class="table-of-contents__link toc-highlight">.write_zarray</a></li><li><a href="#write_zbuffer" class="table-of-contents__link toc-highlight">.write_zbuffer</a></li><li><a href="#write_zstring" class="table-of-contents__link toc-highlight">.write_zstring</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright plainenglish © 2025. Built with Moonwave and Docusaurus</div></div></div></footer></div>
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#expand" class="table-of-contents__link toc-highlight">.expand</a></li><li><a href="#get_capacity" class="table-of-contents__link toc-highlight">.get_capacity</a></li><li><a href="#get_cursor" class="table-of-contents__link toc-highlight">.get_cursor</a></li><li><a href="#get_size" class="table-of-contents__link toc-highlight">.get_size</a></li><li><a href="#set_capacity" class="table-of-contents__link toc-highlight">.set_capacity</a></li><li><a href="#set_cursor" class="table-of-contents__link toc-highlight">.set_cursor</a></li><li><a href="#set_default_vector_size" class="table-of-contents__link toc-highlight">.set_default_vector_size</a></li><li><a href="#to_buffer" class="table-of-contents__link toc-highlight">.to_buffer</a></li><li><a href="#to_string" class="table-of-contents__link toc-highlight">.to_string</a></li><li><a href="#write_any" class="table-of-contents__link toc-highlight">.write_any</a></li><li><a href="#write_array" class="table-of-contents__link toc-highlight">.write_array</a></li><li><a href="#write_bool" class="table-of-contents__link toc-highlight">.write_bool</a></li><li><a href="#write_buffer" class="table-of-contents__link toc-highlight">.write_buffer</a></li><li><a href="#write_f32" class="table-of-contents__link toc-highlight">.write_f32</a></li><li><a href="#write_f64" class="table-of-contents__link toc-highlight">.write_f64</a></li><li><a href="#write_i16" class="table-of-contents__link toc-highlight">.write_i16</a></li><li><a href="#write_i32" class="table-of-contents__link toc-highlight">.write_i32</a></li><li><a href="#write_i8" class="table-of-contents__link toc-highlight">.write_i8</a></li><li><a href="#write_larray" class="table-of-contents__link toc-highlight">.write_larray</a></li><li><a href="#write_lbuffer" class="table-of-contents__link toc-highlight">.write_lbuffer</a></li><li><a href="#write_lstring" class="table-of-contents__link toc-highlight">.write_lstring</a></li><li><a href="#write_null" class="table-of-contents__link toc-highlight">.write_null</a></li><li><a href="#write_optional" class="table-of-contents__link toc-highlight">.write_optional</a></li><li><a href="#write_string" class="table-of-contents__link toc-highlight">.write_string</a></li><li><a href="#write_table" class="table-of-contents__link toc-highlight">.write_table</a></li><li><a href="#write_u16" class="table-of-contents__link toc-highlight">.write_u16</a></li><li><a href="#write_u32" class="table-of-contents__link toc-highlight">.write_u32</a></li><li><a href="#write_u8" class="table-of-contents__link toc-highlight">.write_u8</a></li><li><a href="#write_varint" class="table-of-contents__link toc-highlight">.write_varint</a></li><li><a href="#write_vector" class="table-of-contents__link toc-highlight">.write_vector</a></li><li><a href="#write_zarray" class="table-of-contents__link toc-highlight">.write_zarray</a></li><li><a href="#write_zbuffer" class="table-of-contents__link toc-highlight">.write_zbuffer</a></li><li><a href="#write_zstring" class="table-of-contents__link toc-highlight">.write_zstring</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright plainenglish © 2025. Built with Moonwave and Docusaurus</div></div></div></footer></div>
 </body>
 </html>

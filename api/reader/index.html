@@ -8,48 +8,46 @@
     "><meta data-rh="true" property="og:description" content="Reader instance used to deserialise to binary formats.
 
     "><link data-rh="true" rel="canonical" href="https://plainenglishh.github.io/byteparse/api/reader"><link data-rh="true" rel="alternate" href="https://plainenglishh.github.io/byteparse/api/reader" hreflang="en"><link data-rh="true" rel="alternate" href="https://plainenglishh.github.io/byteparse/api/reader" hreflang="x-default"><link rel="stylesheet" href="/byteparse/assets/css/styles.f5b42892.css">
-<script src="/byteparse/assets/js/runtime~main.d2cb43b5.js" defer="defer"></script>
-<script src="/byteparse/assets/js/main.616bdd42.js" defer="defer"></script>
+<script src="/byteparse/assets/js/runtime~main.1b76e3ea.js" defer="defer"></script>
+<script src="/byteparse/assets/js/main.2e6ae17d.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/byteparse/"><b class="navbar__title text--truncate">Byteparse</b></a><a class="navbar__item navbar__link" href="/byteparse/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/byteparse/api/">API</a><a class="navbar__item navbar__link" href="/byteparse/changelog">Changelog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/plainenglishh/byteparse/releases" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Releases<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/plainenglishh/byteparse" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0 docPageContainer_wNNk"><div class="docPage_Dpn1"><div class="docSidebarContainer_o_re"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/byteparse/api/byteparse">byteparse</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/byteparse/api/reader">reader</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/byteparse/api/writer">writer</a></li></ul></nav></div></div><main class="docMainContainer_HJE1"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_MU3C"><div class="docItemContainer_Wv98"><article><div class="member_J0w1 markdown"><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_oUs_"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><header><h1 class="docTitle_mZRt" style="text-decoration:none"><span style="display:inline-block">reader</span></h1><div class="luaClassTags_EipM"></div><div>
 <p>Reader instance used to deserialise to binary formats.</p>
-</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="set_cursor"><code style="text-decoration:none">set_cursor</code><a href="#set_cursor" class="hash-link" aria-label="Direct link to set_cursor" title="Direct link to set_cursor">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L687"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">set_cursor</code><code>(</code><code>position<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code>(</code><code>)</code></div><div>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="set_cursor"><code style="text-decoration:none">set_cursor</code><a href="#set_cursor" class="hash-link" aria-label="Direct link to set_cursor" title="Direct link to set_cursor">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L755"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">set_cursor</code><code>(</code><code>position<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>Sets the read cursor to a set position.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="get_cursor"><code style="text-decoration:none">get_cursor</code><a href="#get_cursor" class="hash-link" aria-label="Direct link to get_cursor" title="Direct link to get_cursor">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L696"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">get_cursor</code><code>(</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="get_cursor"><code style="text-decoration:none">get_cursor</code><a href="#get_cursor" class="hash-link" aria-label="Direct link to get_cursor" title="Direct link to get_cursor">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L764"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">get_cursor</code><code>(</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
 <p>Returns the current cursor position.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="set_vector_size"><code style="text-decoration:none">set_vector_size</code><a href="#set_vector_size" class="hash-link" aria-label="Direct link to set_vector_size" title="Direct link to set_vector_size">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L716"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">set_vector_size</code><code>(</code><div class="inset_uKQm"><div><code>vec_size<!-- -->: </code><code class="blue_P4bS">number</code><span class="inlineDescription_G7Er">-- <span>
-<p>The vector size, must be either 3 or 4.</p>
-</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="set_default_vector_size"><code style="text-decoration:none">set_default_vector_size</code><a href="#set_default_vector_size" class="hash-link" aria-label="Direct link to set_default_vector_size" title="Direct link to set_default_vector_size">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L784"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">set_default_vector_size</code><code>(</code><code>vec_size<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code>(</code><code>)</code></div><div>
 <p>
   Sets the vector size. The given vector size cannot exceed the VMs
   'LUA_VECTOR_SIZE' size.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_u8"><code style="text-decoration:none">read_u8</code><a href="#read_u8" class="hash-link" aria-label="Direct link to read_u8" title="Direct link to read_u8">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L727"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_u8</code><code>(</code><code>) → </code><code class="blue_P4bS">u8</code></div><div>
+</div><h3>Errors</h3><table class="errorTable_jfN8"><thead><tr><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>InvalidVecSize</td><td>Errors when passed a vector size that isn&#x27;t 3 or 4.</td></tr></tbody></table><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_u8"><code style="text-decoration:none">read_u8</code><a href="#read_u8" class="hash-link" aria-label="Direct link to read_u8" title="Direct link to read_u8">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L795"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_u8</code><code>(</code><code>) → </code><code class="blue_P4bS">u8</code></div><div>
 <p>Reads an unsigned 8 bit integer.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_u16"><code style="text-decoration:none">read_u16</code><a href="#read_u16" class="hash-link" aria-label="Direct link to read_u16" title="Direct link to read_u16">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L736"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_u16</code><code>(</code><code>) → </code><code class="blue_P4bS">u16</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_u16"><code style="text-decoration:none">read_u16</code><a href="#read_u16" class="hash-link" aria-label="Direct link to read_u16" title="Direct link to read_u16">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L804"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_u16</code><code>(</code><code>) → </code><code class="blue_P4bS">u16</code></div><div>
 <p>Reads an unsigned 16 bit integer.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_u32"><code style="text-decoration:none">read_u32</code><a href="#read_u32" class="hash-link" aria-label="Direct link to read_u32" title="Direct link to read_u32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L745"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_u32</code><code>(</code><code>) → </code><code class="blue_P4bS">u32</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_u32"><code style="text-decoration:none">read_u32</code><a href="#read_u32" class="hash-link" aria-label="Direct link to read_u32" title="Direct link to read_u32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L813"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_u32</code><code>(</code><code>) → </code><code class="blue_P4bS">u32</code></div><div>
 <p>Reads an unsigned 32 bit integer.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_i8"><code style="text-decoration:none">read_i8</code><a href="#read_i8" class="hash-link" aria-label="Direct link to read_i8" title="Direct link to read_i8">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L754"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_i8</code><code>(</code><code>) → </code><code class="blue_P4bS">i8</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_i8"><code style="text-decoration:none">read_i8</code><a href="#read_i8" class="hash-link" aria-label="Direct link to read_i8" title="Direct link to read_i8">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L822"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_i8</code><code>(</code><code>) → </code><code class="blue_P4bS">i8</code></div><div>
 <p>Reads a signed 8 bit integer.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_i16"><code style="text-decoration:none">read_i16</code><a href="#read_i16" class="hash-link" aria-label="Direct link to read_i16" title="Direct link to read_i16">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L763"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_i16</code><code>(</code><code>) → </code><code class="blue_P4bS">i16</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_i16"><code style="text-decoration:none">read_i16</code><a href="#read_i16" class="hash-link" aria-label="Direct link to read_i16" title="Direct link to read_i16">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L831"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_i16</code><code>(</code><code>) → </code><code class="blue_P4bS">i16</code></div><div>
 <p>Reads a signed 16 bit integer.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_i32"><code style="text-decoration:none">read_i32</code><a href="#read_i32" class="hash-link" aria-label="Direct link to read_i32" title="Direct link to read_i32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L772"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_i32</code><code>(</code><code>) → </code><code class="blue_P4bS">i32</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_i32"><code style="text-decoration:none">read_i32</code><a href="#read_i32" class="hash-link" aria-label="Direct link to read_i32" title="Direct link to read_i32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L840"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_i32</code><code>(</code><code>) → </code><code class="blue_P4bS">i32</code></div><div>
 <p>Reads a signed 32 bit integer.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_f32"><code style="text-decoration:none">read_f32</code><a href="#read_f32" class="hash-link" aria-label="Direct link to read_f32" title="Direct link to read_f32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L781"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_f32</code><code>(</code><code>) → </code><code class="blue_P4bS">f32</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_f32"><code style="text-decoration:none">read_f32</code><a href="#read_f32" class="hash-link" aria-label="Direct link to read_f32" title="Direct link to read_f32">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L849"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_f32</code><code>(</code><code>) → </code><code class="blue_P4bS">f32</code></div><div>
 <p>Reads a 32 bit floating point number.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_f64"><code style="text-decoration:none">read_f64</code><a href="#read_f64" class="hash-link" aria-label="Direct link to read_f64" title="Direct link to read_f64">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L790"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_f64</code><code>(</code><code>) → </code><code class="blue_P4bS">f64</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_f64"><code style="text-decoration:none">read_f64</code><a href="#read_f64" class="hash-link" aria-label="Direct link to read_f64" title="Direct link to read_f64">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L858"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_f64</code><code>(</code><code>) → </code><code class="blue_P4bS">f64</code></div><div>
 <p>Reads a 64 bit floating point number.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_varint"><code style="text-decoration:none">read_varint</code><a href="#read_varint" class="hash-link" aria-label="Direct link to read_varint" title="Direct link to read_varint">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L799"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_varint</code><code>(</code><code>) → </code><code class="blue_P4bS">varint</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_varint"><code style="text-decoration:none">read_varint</code><a href="#read_varint" class="hash-link" aria-label="Direct link to read_varint" title="Direct link to read_varint">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L867"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_varint</code><code>(</code><code>) → </code><code class="blue_P4bS">varint</code></div><div>
 <p>Reads a ProtoBuf <a href="https://protobuf.dev/programming-guides/encoding/#varints">Base 128 Variable-width integer</a>.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_bool"><code style="text-decoration:none">read_bool</code><a href="#read_bool" class="hash-link" aria-label="Direct link to read_bool" title="Direct link to read_bool">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L815"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_bool</code><code>(</code><code>) → </code><code class="blue_P4bS">boolean</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_bool"><code style="text-decoration:none">read_bool</code><a href="#read_bool" class="hash-link" aria-label="Direct link to read_bool" title="Direct link to read_bool">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L883"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_bool</code><code>(</code><code>) → </code><code class="blue_P4bS">boolean</code></div><div>
 <p>Reads a boolean.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_string"><code style="text-decoration:none">read_string</code><a href="#read_string" class="hash-link" aria-label="Direct link to read_string" title="Direct link to read_string">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L822"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_string</code><code>(</code><code>length<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code class="blue_P4bS">string</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_string"><code style="text-decoration:none">read_string</code><a href="#read_string" class="hash-link" aria-label="Direct link to read_string" title="Direct link to read_string">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L890"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_string</code><code>(</code><code>length<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code class="blue_P4bS">string</code></div><div>
 <p>Reads a string.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_lstring"><code style="text-decoration:none">read_lstring</code><a href="#read_lstring" class="hash-link" aria-label="Direct link to read_lstring" title="Direct link to read_lstring">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L831"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_lstring</code><code>(</code><code>) → </code><code class="blue_P4bS">string</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_lstring"><code style="text-decoration:none">read_lstring</code><a href="#read_lstring" class="hash-link" aria-label="Direct link to read_lstring" title="Direct link to read_lstring">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L899"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_lstring</code><code>(</code><code>) → </code><code class="blue_P4bS">string</code></div><div>
 <p>Reads a length prefixed string.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_zstring"><code style="text-decoration:none">read_zstring</code><a href="#read_zstring" class="hash-link" aria-label="Direct link to read_zstring" title="Direct link to read_zstring">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L844"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_zstring</code><code>(</code><code>size<!-- -->: </code><code class="blue_P4bS">number?</code><code>) → </code><code class="blue_P4bS">string</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_zstring"><code style="text-decoration:none">read_zstring</code><a href="#read_zstring" class="hash-link" aria-label="Direct link to read_zstring" title="Direct link to read_zstring">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L912"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_zstring</code><code>(</code><code>size<!-- -->: </code><code class="blue_P4bS">number?</code><code>) → </code><code class="blue_P4bS">string</code></div><div>
 <p>Reads a null terminated string.</p>
 <p>
   If <code>size</code> is provided, this function will consume the entire string
@@ -57,42 +55,55 @@
   encountered when the entire <code>size</code> has been read, it returns what has
   been already been read and exits.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_buffer"><code style="text-decoration:none">read_buffer</code><a href="#read_buffer" class="hash-link" aria-label="Direct link to read_buffer" title="Direct link to read_buffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L868"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_buffer</code><code>(</code><code>length<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code class="blue_P4bS">buffer</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_buffer"><code style="text-decoration:none">read_buffer</code><a href="#read_buffer" class="hash-link" aria-label="Direct link to read_buffer" title="Direct link to read_buffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L936"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_buffer</code><code>(</code><code>length<!-- -->: </code><code class="blue_P4bS">number</code><code>) → </code><code class="blue_P4bS">buffer</code></div><div>
 <p>Reads a buffer.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_lbuffer"><code style="text-decoration:none">read_lbuffer</code><a href="#read_lbuffer" class="hash-link" aria-label="Direct link to read_lbuffer" title="Direct link to read_lbuffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L878"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_lbuffer</code><code>(</code><code>) → </code><code class="blue_P4bS">buffer</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_lbuffer"><code style="text-decoration:none">read_lbuffer</code><a href="#read_lbuffer" class="hash-link" aria-label="Direct link to read_lbuffer" title="Direct link to read_lbuffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L946"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_lbuffer</code><code>(</code><code>) → </code><code class="blue_P4bS">buffer</code></div><div>
 <p>Reads a length prefixed buffer.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_zbuffer"><code style="text-decoration:none">read_zbuffer</code><a href="#read_zbuffer" class="hash-link" aria-label="Direct link to read_zbuffer" title="Direct link to read_zbuffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L886"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_zbuffer</code><code>(</code><code>) → </code><code class="blue_P4bS">buffer</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_zbuffer"><code style="text-decoration:none">read_zbuffer</code><a href="#read_zbuffer" class="hash-link" aria-label="Direct link to read_zbuffer" title="Direct link to read_zbuffer">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L954"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_zbuffer</code><code>(</code><code>) → </code><code class="blue_P4bS">buffer</code></div><div>
 <p>Reads a null terminated buffer.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_array"><code style="text-decoration:none">read_array</code><a href="#read_array" class="hash-link" aria-label="Direct link to read_array" title="Direct link to read_array">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L908"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_array</code><code>(</code><div class="inset_uKQm"><div><code>size<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code></div><div><code>decoder<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">B...</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="blue_P4bS">T?</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
-<p>Additional parameters to pass to the decoder.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_array"><code style="text-decoration:none">read_array</code><a href="#read_array" class="hash-link" aria-label="Direct link to read_array" title="Direct link to read_array">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L976"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_array</code><code>(</code><div class="inset_uKQm"><div><code>size<!-- -->: </code><code class="blue_P4bS">number</code><code>,</code></div><div><code>reader_callback<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">B...</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="blue_P4bS">T?</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
+<p>Additional parameters to pass to the reader_callback.</p>
 </span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><code class="blue_P4bS">T</code><code class="purple_ieR2">}</code></div><div>
 <p>Reads an array of values.</p>
 <p>
-  Assumes <code>decoder</code> advances the cursor.
-  Stops reading if the decoder returns nil.
+  Assumes <code>reader_callback</code> advances the cursor.
+  Stops reading if the reader_callback returns nil.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_larray"><code style="text-decoration:none">read_larray</code><a href="#read_larray" class="hash-link" aria-label="Direct link to read_larray" title="Direct link to read_larray">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L941"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_larray</code><code>(</code><div class="inset_uKQm"><div><code>decoder<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">B...</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="blue_P4bS">T?</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
-<p>Additional parameters to pass to the decoder.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_larray"><code style="text-decoration:none">read_larray</code><a href="#read_larray" class="hash-link" aria-label="Direct link to read_larray" title="Direct link to read_larray">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L1009"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_larray</code><code>(</code><div class="inset_uKQm"><div><code>reader_callback<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">B...</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="blue_P4bS">T?</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
+<p>Additional parameters to pass to the reader_callback.</p>
 </span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><code class="blue_P4bS">T</code><code class="purple_ieR2">}</code></div><div>
 <p>Reads a length prefixed array of values.</p>
 <p>
-  Assumes <code>decoder</code> advances the cursor.
-  Stops reading if the decoder returns nil.
+  Assumes <code>reader_callback</code> advances the cursor.
+  Stops reading if the reader_callback returns nil.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_zarray"><code style="text-decoration:none">read_zarray</code><a href="#read_zarray" class="hash-link" aria-label="Direct link to read_zarray" title="Direct link to read_zarray">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L954"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_zarray</code><code>(</code><div class="inset_uKQm"><div><code>decoder<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">B...</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="blue_P4bS">T?</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
-<p>Additional parameters to pass to the decoder.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_zarray"><code style="text-decoration:none">read_zarray</code><a href="#read_zarray" class="hash-link" aria-label="Direct link to read_zarray" title="Direct link to read_zarray">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L1022"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_zarray</code><code>(</code><div class="inset_uKQm"><div><code>reader_callback<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">B...</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="blue_P4bS">T?</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code><span class="inlineDescription_G7Er">-- <span>
+<p>Additional parameters to pass to the reader_callback.</p>
 </span></span></div></div><code>) → </code><code class="purple_ieR2">{</code><code class="blue_P4bS">T</code><code class="purple_ieR2">}</code></div><div>
 <p>Reads a null terminated array of values.</p>
 <p>
-  Assumes <code>decoder</code> advances the cursor.
-  Stops reading if the next byte is <code>0</code>, or if the decoder returns nil.
+  Assumes <code>reader_callback</code> advances the cursor.
+  Stops reading if the next byte is <code>0</code>, or if the reader_callback returns nil.
 </p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_vector"><code style="text-decoration:none">read_vector</code><a href="#read_vector" class="hash-link" aria-label="Direct link to read_vector" title="Direct link to read_vector">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L974"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_vector</code><code>(</code><code>) → </code><code class="blue_P4bS">vector</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_vector"><code style="text-decoration:none">read_vector</code><a href="#read_vector" class="hash-link" aria-label="Direct link to read_vector" title="Direct link to read_vector">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L1044"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_vector</code><code>(</code><code>vector_size<!-- -->: </code><code class="blue_P4bS">number?</code><code>) → </code><code class="blue_P4bS">vector</code></div><div>
 <p>Reads a vector.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_table"><code style="text-decoration:none">read_table</code><a href="#read_table" class="hash-link" aria-label="Direct link to read_table" title="Direct link to read_table">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L990"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_table</code><code>(</code><code>) → </code><code class="blue_P4bS">SerialisableTable</code></div><div>
+<p>This function reads either three or four (depending on vector_size)</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_table"><code style="text-decoration:none">read_table</code><a href="#read_table" class="hash-link" aria-label="Direct link to read_table" title="Direct link to read_table">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L1060"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_table</code><code>(</code><code>) → </code><code class="blue_P4bS">SerialisableTable</code></div><div>
 <p>Reads a table.</p>
-</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_any"><code style="text-decoration:none">read_any</code><a href="#read_any" class="hash-link" aria-label="Direct link to read_any" title="Direct link to read_any">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L1020"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_any</code><code>(</code><code>) → </code><code class="blue_P4bS">Serialisable</code></div><div>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_any"><code style="text-decoration:none">read_any</code><a href="#read_any" class="hash-link" aria-label="Direct link to read_any" title="Direct link to read_any">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L1092"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_any</code><code>(</code><code>) → </code><code class="blue_P4bS">Serialisable</code></div><div>
 <p>Reads a type-prefixed value.</p>
+</div><h3>Errors</h3><table class="errorTable_jfN8"><thead><tr><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>InvalidTypeID</td><td>Errors when an unknown type id is read.</td></tr></tbody></table><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="read_optional"><code style="text-decoration:none">read_optional</code><a href="#read_optional" class="hash-link" aria-label="Direct link to read_optional" title="Direct link to read_optional">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/plainenglishh/byteparse/blob/main/lib/init.luau#L1128"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>reader<!-- -->.</code><code class="green_DgR4">read_optional</code><code>(</code><div class="inset_uKQm"><div><code>reader_callback<!-- -->: </code><code class="purple_ieR2">(</code><code class="blue_P4bS">B...</code><code class="purple_ieR2">)</code><code class="purple_ieR2"> → </code><code class="blue_P4bS">T</code><code>,</code></div><div><code>...<!-- -->: </code><code class="blue_P4bS">B...</code></div></div><code>) → </code><code class="blue_P4bS">T?</code></div><div>
+<p>Reads an optional value.</p>
+<p>
+  This function reads a potentially absent value by reading a boolean to
+  determine whether the value is present, and reading the value with
+  <code>reader_callback</code> if it is.
+</p>
+<h4>Example</h4>
+<pre class="language-lua"><code class="language-lua"><span class="token keyword">local</span> reader <span class="token operator">=</span> byteparse<span class="token punctuation">.</span><span class="token function">reader</span><span class="token punctuation">(</span>byteparse<span class="token punctuation">.</span><span class="token function">buffer_from_hex</span><span class="token punctuation">(</span><span class="token string">"0101 00"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+reader<span class="token punctuation">.</span><span class="token function">read_optional</span><span class="token punctuation">(</span>reader<span class="token punctuation">.</span>read_u8<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">-- Returns `1`</span>
+reader<span class="token punctuation">.</span><span class="token function">read_optional</span><span class="token punctuation">(</span>reader<span class="token punctuation">.</span>read_u8<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">-- Returns `nil`</span>
+</code></pre>
 </div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
     &quot;functions&quot;: [
         {
@@ -109,7 +120,7 @@
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;ignore&quot;: true,
             &quot;source&quot;: {
-                &quot;line&quot;: 678,
+                &quot;line&quot;: 746,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -126,7 +137,7 @@
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 687,
+                &quot;line&quot;: 755,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -142,24 +153,30 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 696,
+                &quot;line&quot;: 764,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
         {
-            &quot;name&quot;: &quot;set_vector_size&quot;,
+            &quot;name&quot;: &quot;set_default_vector_size&quot;,
             &quot;desc&quot;: &quot;Sets the vector size. The given vector size cannot exceed the VMs\n&#x27;LUA_VECTOR_SIZE&#x27; size.\n\n    &quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;vec_size&quot;,
-                    &quot;desc&quot;: &quot;The vector size, must be either 3 or 4.&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
                     &quot;lua_type&quot;: &quot;number&quot;
                 }
             ],
             &quot;returns&quot;: [],
             &quot;function_type&quot;: &quot;static&quot;,
+            &quot;errors&quot;: [
+                {
+                    &quot;lua_type&quot;: &quot;InvalidVecSize&quot;,
+                    &quot;desc&quot;: &quot;Errors when passed a vector size that isn&#x27;t 3 or 4.&quot;
+                }
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 716,
+                &quot;line&quot;: 784,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -175,7 +192,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 727,
+                &quot;line&quot;: 795,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -191,7 +208,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 736,
+                &quot;line&quot;: 804,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -207,7 +224,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 745,
+                &quot;line&quot;: 813,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -223,7 +240,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 754,
+                &quot;line&quot;: 822,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -239,7 +256,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 763,
+                &quot;line&quot;: 831,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -255,7 +272,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 772,
+                &quot;line&quot;: 840,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -271,7 +288,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 781,
+                &quot;line&quot;: 849,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -287,7 +304,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 790,
+                &quot;line&quot;: 858,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -303,7 +320,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 799,
+                &quot;line&quot;: 867,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -319,7 +336,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 815,
+                &quot;line&quot;: 883,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -341,7 +358,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 822,
+                &quot;line&quot;: 890,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -357,7 +374,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 831,
+                &quot;line&quot;: 899,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -379,7 +396,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 844,
+                &quot;line&quot;: 912,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -401,7 +418,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 868,
+                &quot;line&quot;: 936,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -417,7 +434,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 878,
+                &quot;line&quot;: 946,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -433,13 +450,13 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 886,
+                &quot;line&quot;: 954,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
         {
             &quot;name&quot;: &quot;read_array&quot;,
-            &quot;desc&quot;: &quot;Reads an array of values.\n\nAssumes `decoder` advances the cursor.\nStops reading if the decoder returns nil.\n\n    &quot;,
+            &quot;desc&quot;: &quot;Reads an array of values.\n\nAssumes `reader_callback` advances the cursor.\nStops reading if the reader_callback returns nil.\n\n    &quot;,
             &quot;params&quot;: [
                 {
                     &quot;name&quot;: &quot;size&quot;,
@@ -447,13 +464,13 @@
                     &quot;lua_type&quot;: &quot;number&quot;
                 },
                 {
-                    &quot;name&quot;: &quot;decoder&quot;,
+                    &quot;name&quot;: &quot;reader_callback&quot;,
                     &quot;desc&quot;: &quot;&quot;,
                     &quot;lua_type&quot;: &quot;(B...) -&gt; T?&quot;
                 },
                 {
                     &quot;name&quot;: &quot;...&quot;,
-                    &quot;desc&quot;: &quot;Additional parameters to pass to the decoder.&quot;,
+                    &quot;desc&quot;: &quot;Additional parameters to pass to the reader_callback.&quot;,
                     &quot;lua_type&quot;: &quot;B...&quot;
                 }
             ],
@@ -465,22 +482,22 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 908,
+                &quot;line&quot;: 976,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
         {
             &quot;name&quot;: &quot;read_larray&quot;,
-            &quot;desc&quot;: &quot;Reads a length prefixed array of values.\n\nAssumes `decoder` advances the cursor.\nStops reading if the decoder returns nil.\n\n    &quot;,
+            &quot;desc&quot;: &quot;Reads a length prefixed array of values.\n\nAssumes `reader_callback` advances the cursor.\nStops reading if the reader_callback returns nil.\n\n    &quot;,
             &quot;params&quot;: [
                 {
-                    &quot;name&quot;: &quot;decoder&quot;,
+                    &quot;name&quot;: &quot;reader_callback&quot;,
                     &quot;desc&quot;: &quot;&quot;,
                     &quot;lua_type&quot;: &quot;(B...) -&gt; T?&quot;
                 },
                 {
                     &quot;name&quot;: &quot;...&quot;,
-                    &quot;desc&quot;: &quot;Additional parameters to pass to the decoder.&quot;,
+                    &quot;desc&quot;: &quot;Additional parameters to pass to the reader_callback.&quot;,
                     &quot;lua_type&quot;: &quot;B...&quot;
                 }
             ],
@@ -492,22 +509,22 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 941,
+                &quot;line&quot;: 1009,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
         {
             &quot;name&quot;: &quot;read_zarray&quot;,
-            &quot;desc&quot;: &quot;Reads a null terminated array of values.\n\nAssumes `decoder` advances the cursor.\nStops reading if the next byte is `0`, or if the decoder returns nil.\n\n    &quot;,
+            &quot;desc&quot;: &quot;Reads a null terminated array of values.\n\nAssumes `reader_callback` advances the cursor.\nStops reading if the next byte is `0`, or if the reader_callback returns nil.\n\n    &quot;,
             &quot;params&quot;: [
                 {
-                    &quot;name&quot;: &quot;decoder&quot;,
+                    &quot;name&quot;: &quot;reader_callback&quot;,
                     &quot;desc&quot;: &quot;&quot;,
                     &quot;lua_type&quot;: &quot;(B...) -&gt; T?&quot;
                 },
                 {
                     &quot;name&quot;: &quot;...&quot;,
-                    &quot;desc&quot;: &quot;Additional parameters to pass to the decoder.&quot;,
+                    &quot;desc&quot;: &quot;Additional parameters to pass to the reader_callback.&quot;,
                     &quot;lua_type&quot;: &quot;B...&quot;
                 }
             ],
@@ -519,14 +536,20 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 954,
+                &quot;line&quot;: 1022,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
         {
             &quot;name&quot;: &quot;read_vector&quot;,
-            &quot;desc&quot;: &quot;Reads a vector.\n    &quot;,
-            &quot;params&quot;: [],
+            &quot;desc&quot;: &quot;Reads a vector.\n\nThis function reads either three or four (depending on vector_size)\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;vector_size&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number?&quot;
+                }
+            ],
             &quot;returns&quot;: [
                 {
                     &quot;desc&quot;: &quot;&quot;,
@@ -535,7 +558,7 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 974,
+                &quot;line&quot;: 1044,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
@@ -551,13 +574,13 @@
             ],
             &quot;function_type&quot;: &quot;static&quot;,
             &quot;source&quot;: {
-                &quot;line&quot;: 990,
+                &quot;line&quot;: 1060,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         },
         {
             &quot;name&quot;: &quot;read_any&quot;,
-            &quot;desc&quot;: &quot;Reads a type-prefixed value.\n    &quot;,
+            &quot;desc&quot;: &quot;Reads a type-prefixed value.\n\n    &quot;,
             &quot;params&quot;: [],
             &quot;returns&quot;: [
                 {
@@ -566,8 +589,41 @@
                 }
             ],
             &quot;function_type&quot;: &quot;static&quot;,
+            &quot;errors&quot;: [
+                {
+                    &quot;lua_type&quot;: &quot;InvalidTypeID&quot;,
+                    &quot;desc&quot;: &quot;Errors when an unknown type id is read.&quot;
+                }
+            ],
             &quot;source&quot;: {
-                &quot;line&quot;: 1020,
+                &quot;line&quot;: 1092,
+                &quot;path&quot;: &quot;lib/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;read_optional&quot;,
+            &quot;desc&quot;: &quot;Reads an optional value.\n\nThis function reads a potentially absent value by reading a boolean to\ndetermine whether the value is present, and reading the value with\n`reader_callback` if it is.\n\n#### Example\n```lua\nlocal reader = byteparse.reader(byteparse.buffer_from_hex(\&quot;0101 00\&quot;));\nreader.read_optional(reader.read_u8); -- Returns `1`\nreader.read_optional(reader.read_u8); -- Returns `nil`\n```\n    &quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;reader_callback&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;(B...) -&gt; T&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;...&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;B...&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;T?\r\n&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 1128,
                 &quot;path&quot;: &quot;lib/init.luau&quot;
             }
         }
@@ -577,9 +633,9 @@
     &quot;name&quot;: &quot;reader&quot;,
     &quot;desc&quot;: &quot;Reader instance used to deserialise to binary formats.\n\n    &quot;,
     &quot;source&quot;: {
-        &quot;line&quot;: 705,
+        &quot;line&quot;: 773,
         &quot;path&quot;: &quot;lib/init.luau&quot;
     }
-}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#get_cursor" class="table-of-contents__link toc-highlight">.get_cursor</a></li><li><a href="#read_any" class="table-of-contents__link toc-highlight">.read_any</a></li><li><a href="#read_array" class="table-of-contents__link toc-highlight">.read_array</a></li><li><a href="#read_bool" class="table-of-contents__link toc-highlight">.read_bool</a></li><li><a href="#read_buffer" class="table-of-contents__link toc-highlight">.read_buffer</a></li><li><a href="#read_f32" class="table-of-contents__link toc-highlight">.read_f32</a></li><li><a href="#read_f64" class="table-of-contents__link toc-highlight">.read_f64</a></li><li><a href="#read_i16" class="table-of-contents__link toc-highlight">.read_i16</a></li><li><a href="#read_i32" class="table-of-contents__link toc-highlight">.read_i32</a></li><li><a href="#read_i8" class="table-of-contents__link toc-highlight">.read_i8</a></li><li><a href="#read_larray" class="table-of-contents__link toc-highlight">.read_larray</a></li><li><a href="#read_lbuffer" class="table-of-contents__link toc-highlight">.read_lbuffer</a></li><li><a href="#read_lstring" class="table-of-contents__link toc-highlight">.read_lstring</a></li><li><a href="#read_string" class="table-of-contents__link toc-highlight">.read_string</a></li><li><a href="#read_table" class="table-of-contents__link toc-highlight">.read_table</a></li><li><a href="#read_u16" class="table-of-contents__link toc-highlight">.read_u16</a></li><li><a href="#read_u32" class="table-of-contents__link toc-highlight">.read_u32</a></li><li><a href="#read_u8" class="table-of-contents__link toc-highlight">.read_u8</a></li><li><a href="#read_varint" class="table-of-contents__link toc-highlight">.read_varint</a></li><li><a href="#read_vector" class="table-of-contents__link toc-highlight">.read_vector</a></li><li><a href="#read_zarray" class="table-of-contents__link toc-highlight">.read_zarray</a></li><li><a href="#read_zbuffer" class="table-of-contents__link toc-highlight">.read_zbuffer</a></li><li><a href="#read_zstring" class="table-of-contents__link toc-highlight">.read_zstring</a></li><li><a href="#set_cursor" class="table-of-contents__link toc-highlight">.set_cursor</a></li><li><a href="#set_vector_size" class="table-of-contents__link toc-highlight">.set_vector_size</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright plainenglish © 2025. Built with Moonwave and Docusaurus</div></div></div></footer></div>
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#get_cursor" class="table-of-contents__link toc-highlight">.get_cursor</a></li><li><a href="#read_any" class="table-of-contents__link toc-highlight">.read_any</a></li><li><a href="#read_array" class="table-of-contents__link toc-highlight">.read_array</a></li><li><a href="#read_bool" class="table-of-contents__link toc-highlight">.read_bool</a></li><li><a href="#read_buffer" class="table-of-contents__link toc-highlight">.read_buffer</a></li><li><a href="#read_f32" class="table-of-contents__link toc-highlight">.read_f32</a></li><li><a href="#read_f64" class="table-of-contents__link toc-highlight">.read_f64</a></li><li><a href="#read_i16" class="table-of-contents__link toc-highlight">.read_i16</a></li><li><a href="#read_i32" class="table-of-contents__link toc-highlight">.read_i32</a></li><li><a href="#read_i8" class="table-of-contents__link toc-highlight">.read_i8</a></li><li><a href="#read_larray" class="table-of-contents__link toc-highlight">.read_larray</a></li><li><a href="#read_lbuffer" class="table-of-contents__link toc-highlight">.read_lbuffer</a></li><li><a href="#read_lstring" class="table-of-contents__link toc-highlight">.read_lstring</a></li><li><a href="#read_optional" class="table-of-contents__link toc-highlight">.read_optional</a></li><li><a href="#read_string" class="table-of-contents__link toc-highlight">.read_string</a></li><li><a href="#read_table" class="table-of-contents__link toc-highlight">.read_table</a></li><li><a href="#read_u16" class="table-of-contents__link toc-highlight">.read_u16</a></li><li><a href="#read_u32" class="table-of-contents__link toc-highlight">.read_u32</a></li><li><a href="#read_u8" class="table-of-contents__link toc-highlight">.read_u8</a></li><li><a href="#read_varint" class="table-of-contents__link toc-highlight">.read_varint</a></li><li><a href="#read_vector" class="table-of-contents__link toc-highlight">.read_vector</a></li><li><a href="#read_zarray" class="table-of-contents__link toc-highlight">.read_zarray</a></li><li><a href="#read_zbuffer" class="table-of-contents__link toc-highlight">.read_zbuffer</a></li><li><a href="#read_zstring" class="table-of-contents__link toc-highlight">.read_zstring</a></li><li><a href="#set_cursor" class="table-of-contents__link toc-highlight">.set_cursor</a></li><li><a href="#set_default_vector_size" class="table-of-contents__link toc-highlight">.set_default_vector_size</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright plainenglish © 2025. Built with Moonwave and Docusaurus</div></div></div></footer></div>
 </body>
 </html>
