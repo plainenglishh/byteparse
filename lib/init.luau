@@ -711,7 +711,7 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
         followed by the data itself (if present) using `writer_callback`.
 
         #### Example Use
-        ```luau
+        ```lua
         writer.write_optional(1, writer.write_u8); -- Writes `0101`
         writer.write_optional(nil, writer.write_u8); -- Writes `00`
         ```
