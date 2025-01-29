@@ -41,6 +41,15 @@ if type(vector) == "function" then
     };
 end
 
+local function dump(buf: buffer|string)
+    local buf = if type(buf) == "string" then buffer.fromstring(buf) else buf;
+    local str = "";
+    for i = 0, buffer.len(buf) - 1 do
+        str ..= string.format("%02X ", buffer.readu8(buf, i));
+    end
+    return (str);
+end
+
 local function assert_buffer_eq(buf: buffer, eq_to: string)
     local eq_to = string.gsub(eq_to, "%X", "");
     local bytes = {};
@@ -51,36 +60,17 @@ local function assert_buffer_eq(buf: buffer, eq_to: string)
     end
 
     if buffer.len(buf) ~= #bytes then
-        error(`buffers should be of equal length, a = {buffer.len(buf)}, b = {#bytes}`);
+        error(`buffers should be of equal length, a = {buffer.len(buf)}, b = {#bytes}`, 2);
     end
 
     for i = 0, buffer.len(buf) - 1 do
         local a = buffer.readu8(buf, i);
         local b = bytes[i + 1];
         if a ~= b then
-            error(`expected byte at offset {i} to be {string.format("%02X", b)}, got {string.format("%02X", a)} instead`)
+            error(`expected byte at offset {i} to be {string.format("%02X", b)}, got {string.format("%02X", a)} instead. test_buffer = <{eq_to}>, got_buf = <{dump(buf):gsub("%s", "")}>`, 2);
         end
     end
 end
-
-local function dump(buf: buffer|string)
-    local buf = if type(buf) == "string" then buffer.fromstring(buf) else buf;
-    local str = "";
-    for i = 0, buffer.len(buf) - 1 do
-        str ..= string.format("%02X ", buffer.readu8(buf, i));
-    end
-    return (str);
-end
-
-local function buffer_from(hex: string)
-    local writer = byteparse.writer(100);
-    for i = 1, #hex, 2  do
-        local byte = tonumber(string.sub(hex, i, i + 1), 16) or error("expected hex value");
-        writer.write_u8(byte);
-    end
-    return writer.to_buffer();
-end
-
 --------------------------------------------------------------------------------
 
 --// Library Unit Tests
@@ -129,7 +119,25 @@ test("library::zterm_string", function()
 end);
 
 test("library::zterm_buffer", function()
-    assert_buffer_eq(byteparse.zterm_buffer(buffer_from("FF")), "FF00");
+    assert_buffer_eq(byteparse.zterm_buffer(byteparse.buffer_from_hex("FF")), "FF00");
+end);
+
+test("library::byteparse.buffer_from_hex_hex", function()
+    assert_buffer_eq(byteparse.buffer_from_hex("1A2A3A"), "1A2A3A");
+end);
+
+test("library::buffer_reverse", function()
+    do
+        local b = byteparse.buffer_from_hex("00 1A 2A 3A 00");
+        byteparse.buffer_reverse(b, 1, 3);
+        assert_buffer_eq(b, "00 3A 2A 1A 00");
+    end
+
+    do
+        local b = byteparse.buffer_from_hex("1A 2A");
+        byteparse.buffer_reverse(b);
+        assert_buffer_eq(b, "2A 1A");
+    end
 end);
 
 test("library::{writer,reader}::new", function()
@@ -160,9 +168,9 @@ end);
 
 test("library::{writer,reader}::set_vector_size", function()
     local writer = byteparse.writer(0);
-    writer.set_vector_size(4);
+    writer.set_default_vector_size(4);
     local reader = byteparse.reader(buffer.create(100));
-    reader.set_vector_size(4);
+    reader.set_default_vector_size(4);
 end);
 
 test("library::writer::to_buffer", function()
@@ -365,8 +373,8 @@ end);
 
 test("library::{writer,reader}::{write,read}_buffer", function()
     local writer = byteparse.writer(1);
-    writer.write_buffer(buffer_from("00010203"));
-    writer.write_buffer(buffer_from("04050607"));
+    writer.write_buffer(byteparse.buffer_from_hex("00010203"));
+    writer.write_buffer(byteparse.buffer_from_hex("04050607"));
     
     local buf = writer.to_buffer();
     assert_buffer_eq(buf, "00010203 04050607")
@@ -378,8 +386,8 @@ end);
 
 test("library::{writer,reader}::{write,read}_lbuffer", function()
     local writer = byteparse.writer(1);
-    writer.write_lbuffer(buffer_from("1A2A3A4A"));
-    writer.write_lbuffer(buffer_from("1A2A"));
+    writer.write_lbuffer(byteparse.buffer_from_hex("1A2A3A4A"));
+    writer.write_lbuffer(byteparse.buffer_from_hex("1A2A"));
     
     local buf = writer.to_buffer();
     assert_buffer_eq(buf, "041A2A3A4A 021A2A")
@@ -391,8 +399,8 @@ end);
 
 test("library::{writer,reader}::{write,read}_zbuffer", function()
     local writer = byteparse.writer(1);
-    writer.write_zbuffer(buffer_from("1A2A3A4A"));
-    writer.write_zbuffer(buffer_from("1A2A"));
+    writer.write_zbuffer(byteparse.buffer_from_hex("1A2A3A4A"));
+    writer.write_zbuffer(byteparse.buffer_from_hex("1A2A"));
     
     local buf = writer.to_buffer();
     assert_buffer_eq(buf, "1A2A3A4A00 1A2A00")
@@ -455,7 +463,7 @@ test("library::{writer,reader}::{write,read}_vector", function()
     local vector_2 = vector.create(3, 2, 1);
 
     local writer = byteparse.writer(1);
-    writer.set_vector_size(3);
+    writer.set_default_vector_size(3);
     writer.write_vector(vector_1);
     writer.write_vector(vector_2);
     
@@ -508,6 +516,21 @@ test("library::{writer,reader}::{write,read}_any", function()
     assert(buffer.tostring(reader.read_any() :: any) == "helloworld");
     assert_tbl_eq(reader.read_any(), {1});
 end);
+
+test("library::{writer,reader}::{write,read}_optional", function()
+    local writer = byteparse.writer(0);
+    writer.write_optional(1, writer.write_u8);
+    writer.write_optional(nil, writer.write_u8);
+
+    local buf = writer.to_buffer();
+    assert_buffer_eq(buf, "0101 00");
+
+
+    local reader = byteparse.reader(buf);
+    assert(reader.read_optional(reader.read_u8) == 1);
+    assert(reader.read_optional(reader.read_u8) == nil);
+end);
+
 
 --------------------------------------------------------------------------------
 

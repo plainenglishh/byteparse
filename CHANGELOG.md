@@ -2,6 +2,23 @@
 
 -----
 
+## v1.2.0
+
+### Added
+
+- Added `writer::write_optional` and `reader::read_optional` to write and read potentially absent values;
+- Added a `buffer_from_hex` utility function to create buffers from a hex string;
+- Added a `buffer_reverse` utility function to reverse the contents of a buffer;
+- Added a `vector_size` parameter to `writer::write_vector` and `reader::read_vector` to override the writer/readers default value.
+
+### Changes
+
+- Renamed 'encoder' and 'decoder' callbacks to 'writer_callback' and 'reader_callback' callbacks to better indicate their purpose;
+- Renamed `{writer,reader}::set_vector_size` to `{writer,reader}::set_default_vector_size`;
+- Vector lib warnings now only fire once, instead of every time.
+
+-----
+
 ## v1.1.0
 
 ### Added

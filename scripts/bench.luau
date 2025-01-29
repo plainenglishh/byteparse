@@ -104,7 +104,7 @@ do
     end);
 
     local function bench_read_n(t: string)
-        bench(`library::reader::read_{t}::100kb`, 5, {}, function(start, stop)
+        bench(`library::reader::read_{t}::100k`, 5, {}, function(start, stop)
             local reader = byteparse.reader(DATASETS.EMPTY_1GB);
             local read_fn = reader["read_"..t];
             start();
@@ -114,7 +114,7 @@ do
             stop();
         end);
     
-        bench(`library::reader::read_{t}::1mb`, 5, {}, function(start, stop)
+        bench(`library::reader::read_{t}::1m`, 5, {}, function(start, stop)
             local reader = byteparse.reader(DATASETS.EMPTY_1GB);
             local read_fn = reader["read_"..t];
             start();
@@ -123,16 +123,6 @@ do
             end
             stop();
         end);
-
-        bench(`library::reader::read_{t}::8.4mb`, 1, {}, function(start, stop)
-            local reader = byteparse.reader(DATASETS.EMPTY_1GB);
-            local read_fn = reader["read_"..t];
-            start();
-            for i = 1, 8_400_000 do
-                read_fn();
-            end
-            stop();
-        end, "1920 x 1080 raw RGBA pixel data");
     end
     
     bench_read_n("u8");
@@ -144,6 +134,15 @@ do
     bench_read_n("f32");
     bench_read_n("f64");
     bench_read_n("bool");
+
+    bench(`library::reader::read_u32::2.1m`, 1, {}, function(start, stop)
+        local reader = byteparse.reader(DATASETS.EMPTY_1GB);
+        start();
+        for i = 1, 2_100_000 do
+            reader.read_u32();
+        end
+        stop();
+    end, "1920 x 1080 raw RGBA pixel data (each px as a u32)");
 
     bench(`library::reader::read_varint::100k`, 5, {}, function(start, stop)
         local reader = byteparse.reader(DATASETS.VARINTS_1M);
