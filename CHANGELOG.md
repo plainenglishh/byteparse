@@ -2,6 +2,14 @@
 
 -----
 
+## v1.2.1
+
+### Removed
+
+- Removed vector lib warning.
+
+-----
+
 ## v1.2.0
 
 ### Added

@@ -1,5 +1,5 @@
 name = "plainenglish/byteparse"
-version = "1.2.0"
+version = "1.2.1"
 description = "Pure-luau library for serialising and deserialising binary formats."
 authors = ["plainenglish <plainenglish@spearhead.industries>"]
 repository = "https://github.com/plainenglishh/byteparse"
