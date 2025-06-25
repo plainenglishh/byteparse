@@ -1,5 +1,5 @@
 --[[
-    plainenglishh/byteparse v1.3.0
+    plainenglishh/byteparse v1.3.1
    
     Pure-luau library for serialising and deserialising binary formats.
 ]]
@@ -33,7 +33,7 @@
 --!strict
 --!nolint LocalShadow
 
-local _BYTEPARSE_VERSION = "v1.3.0";
+local _BYTEPARSE_VERSION = "v1.3.1";
 
 export type u8 = number;
 export type u16 = number;
@@ -91,7 +91,7 @@ local error_mt = {
     end,
 };
 
-local function BPError(reason: string, message: string)
+local function Error(reason: string, message: string)
     return setmetatable({ reason = reason, message = message, }, error_mt);
 end
 
@@ -344,7 +344,7 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
     ]=]
     function writer.set_default_vector_size(vec_size: number)
         if vec_size ~= 3 and vec_size ~= 4 then
-            error(BPError("InvalidVecSize", `expected either 3 or 4, got {vec_size}`), 2);
+            error(Error("InvalidVecSize", `expected either 3 or 4, got {vec_size}`), 2);
         end
 
         default_vector_size = vec_size;
@@ -688,7 +688,7 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
             writer.write_u8(TYPE_IDS.TABLE);
             writer.write_table(value);
         else
-            error(BPError("Unserialisable", `can't serialise value of type {type(value)}`));
+            error(Error("Unserialisable", `can't serialise value of type {type(value)}`));
         end
     end
 
@@ -705,9 +705,8 @@ function byteparse.writer(start_size: number, expansion_rate: number?)
         ```
     ]=]
     function writer.write_optional<T, B...>(value: T?, writer_callback: (T, B...) -> (), ...: B...)
-        local present = value ~= nil;
-        writer.write_bool(present);
-        if present then
+        writer.write_bool(value ~= nil);
+        if value ~= nil then
             writer_callback(value, ...);
         end
     end
@@ -770,7 +769,7 @@ function byteparse.reader(b: buffer)
     ]=]
     function reader.set_default_vector_size(vec_size: number)
         if vec_size ~= 3 and vec_size ~= 4 then
-            error(BPError("InvalidVecSize", `expected either 3 or 4, got {vec_size}`), 2);
+            error(Error("InvalidVecSize", `expected either 3 or 4, got {vec_size}`), 2);
         end
 
         default_vector_size = vec_size;
@@ -1095,7 +1094,7 @@ function byteparse.reader(b: buffer)
             return reader.read_table();
         end
 
-        error(BPError("InvalidTypeID", `got invalid type id {type_id}`));
+        error(Error("InvalidTypeID", `got invalid type id {type_id}`));
     end
 
     --[=[

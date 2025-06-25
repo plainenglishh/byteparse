@@ -2,6 +2,14 @@
 
 -----
 
+## v1.3.1
+
+### Fixed
+
+- Fixed type refinement issue in `writer.write_optional`.
+
+-----
+
 ## v1.3.0
 
 ### Fixed
