@@ -545,7 +545,7 @@ local function run_tests()
     end
 
     for _, test in tests do
-        stdio.write(string.format(`%-{longest}s .. `, test.name));
+        stdio.write((string.format :: any)(`%-{longest}s .. `, test.name));
         local ok, err = pcall(test.fn :: any);
         if ok then
             stdio.write(`{stdio.color("green")}pass{stdio.color("reset")}\n`);

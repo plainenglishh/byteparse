@@ -5,4 +5,4 @@
 
 [tools]
 pesde = "pesde-pkg/pesde@0.5.3+registry.0.1.2"
-lune = "lune-org/lune@0.8.9"
+lune = "lune-org/lune@0.9.4"

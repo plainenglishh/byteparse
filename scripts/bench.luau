@@ -20,28 +20,6 @@ local function bench(name: string, rept: number, range: {number}, fn: (start: ()
         },
     });
 end
-local vec_warn;
-if type(vector) == "function" then
-    print("got mlua vector constructor, vector benchmarks may be inaccurate");
-    vec_warn = "got mlua vector constructor, benchmark may be inaccurate";
-    local env = luau.load("return getfenv;")()(1);
-
-    env.vector = {
-        create = function(x: number, y: number, z: number, w: number)
-            return setmetatable({
-                x = x or 0,
-                y = y or 0,
-                z = z or 0,
-                w = w or 0,
-            }, {
-                __eq = function(a, b)
-                    return (a.x == b.x) and (a.y == b.y) and (a.z == b.z) and (a.w == b.w);
-                end,
-                __type = "vector",
-            });
-        end,
-    };
-end
 
 local function buffer_from(hex: string, rep: number?)
     local rep = rep or 1;
@@ -54,13 +32,13 @@ local function buffer_from(hex: string, rep: number?)
     return writer.to_buffer();
 end
 
-local function copy_buffer(buf)
+local function copy_buffer(buf: buffer): buffer
     local new_buf = buffer.create(buffer.len(buf));
     buffer.copy(new_buf, 0, buf);
     return new_buf;
 end
 
-local function rep_buffer(buf, rep)
+local function rep_buffer(buf: buffer, rep: number): buffer
     local new_buf = buffer.create(buffer.len(buf) * rep);
     for i = 0, rep - 1 do
         buffer.copy(new_buf, i*buffer.len(buf), buf);
@@ -106,7 +84,7 @@ do
     local function bench_read_n(t: string)
         bench(`library::reader::read_{t}::100k`, 5, {}, function(start, stop)
             local reader = byteparse.reader(DATASETS.EMPTY_1GB);
-            local read_fn = reader["read_"..t];
+            local read_fn = (reader :: any)["read_"..t];
             start();
             for i = 1, 100_000 do
                 read_fn();
@@ -116,7 +94,7 @@ do
     
         bench(`library::reader::read_{t}::1m`, 5, {}, function(start, stop)
             local reader = byteparse.reader(DATASETS.EMPTY_1GB);
-            local read_fn = reader["read_"..t];
+            local read_fn = (reader :: any)["read_"..t];
             start();
             for i = 1, 1_000_000 do
                 read_fn();
@@ -223,7 +201,7 @@ do
             reader.read_vector();
         end
         stop();
-    end, vec_warn);
+    end);
     
     bench(`library::reader::read_vector::1m`, 1, {}, function(start, stop)
         local reader = byteparse.reader(DATASETS.VECTOR_1M);
@@ -232,7 +210,7 @@ do
             reader.read_vector();
         end
         stop();
-    end, vec_warn);
+    end);
 
     bench(`library::reader::read_table::100k`, 2, {}, function(start, stop)
         local reader = byteparse.reader(DATASETS.TABLE_1M);
@@ -275,7 +253,7 @@ do
     local function bench_write_n(t: string)
         bench(`library::writer::write_{t}::100k`, 5, {}, function(start, stop)
             local writer = byteparse.writer(999_999_999);
-            local write_fn = writer["write_"..t];
+            local write_fn = (writer :: any)["write_"..t];
             start();
             for i = 1, 100_000 do
                 write_fn(0);
@@ -285,7 +263,7 @@ do
     
         bench(`library::writer::write_{t}::1m`, 5, {}, function(start, stop)
             local writer = byteparse.writer(999_999_999);
-            local write_fn = writer["write_"..t];
+            local write_fn = (writer :: any)["write_"..t];
             start();
             for i = 1, 1_000_000 do
                 write_fn(0);
@@ -295,7 +273,7 @@ do
 
         bench(`library::writer::write_{t}::8.4m`, 1, {}, function(start, stop)
             local writer = byteparse.writer(999_999_999);
-            local write_fn = writer["write_"..t];
+            local write_fn = (writer :: any)["write_"..t];
             start();
             for i = 1, 8_400_000 do
                 write_fn(0);
@@ -323,7 +301,7 @@ local function run_benches()
     end
 
     for _, bench in tests do
-        stdio.write(string.format(`%-{longest}s .. `, bench.name));
+        stdio.write((string.format :: any)(`%-{longest}s .. `, bench.name));
         local avg = 0;
 
         for i = 1, bench.rept do
